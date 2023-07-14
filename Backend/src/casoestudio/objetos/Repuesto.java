@@ -10,6 +10,7 @@ public class Repuesto {
     private String Modelo;
     private int Precio;
     private String Annio;
+    private int cantidad;
 
     public Repuesto(String nombre, String descripcion, int codID, String categoria, String modelo, int precio, String annio) {
         Nombre = nombre;
