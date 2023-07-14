@@ -6,44 +6,65 @@ public class Nave {
    private String color;
    private String motor;
    private String propulsores;
+   private Usuario id_usuario;
 
-    public int getIdNave() {
-        return idNave;
-    }
+   public Nave(int idNave, String codigo, String color, String motor, String propulsores, Usuario id_usuario) {
+      this.idNave = idNave;
+      this.codigo = codigo;
+      this.color = color;
+      this.motor = motor;
+      this.propulsores = propulsores;
+      this.id_usuario = id_usuario;
+   }
 
-    public void setIdNave(int idNave) {
-        this.idNave = idNave;
-    }
+   public Nave() {
+   }
 
-    public String getCodigo() {
-        return codigo;
-    }
+   public int getIdNave() {
+      return idNave;
+   }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
+   public void setIdNave(int idNave) {
+      this.idNave = idNave;
+   }
 
-    public String getColor() {
-        return color;
-    }
+   public String getCodigo() {
+      return codigo;
+   }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
+   public void setCodigo(String codigo) {
+      this.codigo = codigo;
+   }
 
-    public String getMotor() {
-        return motor;
-    }
+   public String getColor() {
+      return color;
+   }
 
-    public void setMotor(String motor) {
-        this.motor = motor;
-    }
+   public void setColor(String color) {
+      this.color = color;
+   }
 
-    public String getPropulsores() {
-        return propulsores;
-    }
+   public String getMotor() {
+      return motor;
+   }
 
-    public void setPropulsores(String propulsores) {
-        this.propulsores = propulsores;
-    }
+   public void setMotor(String motor) {
+      this.motor = motor;
+   }
+
+   public String getPropulsores() {
+      return propulsores;
+   }
+
+   public void setPropulsores(String propulsores) {
+      this.propulsores = propulsores;
+   }
+
+   public Usuario getId_usuario() {
+      return id_usuario;
+   }
+
+   public void setId_usuario(Usuario id_usuario) {
+      this.id_usuario = id_usuario;
+   }
 }

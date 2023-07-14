@@ -13,7 +13,7 @@ public abstract class Builder {
         return this.nave;
     }
 
-    public void crearNuevoCoche() {
+    public void crearNuevaNave() {
         this.nave = new Nave();
     }
 
