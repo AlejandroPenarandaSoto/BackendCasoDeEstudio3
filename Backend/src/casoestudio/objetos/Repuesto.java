@@ -9,10 +9,10 @@ public class Repuesto {
     private String Categoria;
     private String Modelo;
     private int Precio;
-    private String Annio;
+    private int Annio;
     private int cantidad;
 
-    public Repuesto(String nombre, String descripcion, int codID, String categoria, String modelo, int precio, String annio) {
+    public Repuesto(String nombre, String descripcion, int codID, String categoria, String modelo, int precio, int annio, int cantidad) {
         Nombre = nombre;
         Descripcion = descripcion;
         this.codID = codID;
@@ -20,6 +20,7 @@ public class Repuesto {
         Modelo = modelo;
         Precio = precio;
         Annio = annio;
+        this.cantidad = cantidad;
     }
 
     public String getNombre() {
@@ -70,24 +71,33 @@ public class Repuesto {
         Precio = precio;
     }
 
-    public String getAnnio() {
+    public Integer getAnnio() {
         return Annio;
     }
 
-    public void setAnnio(String annio) {
+    public void setAnnio(int annio) {
         Annio = annio;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     @Override
     public String toString() {
         return "Repuesto{" +
-                ", Nombre='" + Nombre + '\'' +
+                "Nombre='" + Nombre + '\'' +
                 ", Descripcion='" + Descripcion + '\'' +
                 ", codID=" + codID +
                 ", Categoria='" + Categoria + '\'' +
                 ", Modelo='" + Modelo + '\'' +
                 ", Precio=" + Precio +
-                ", Annio='" + Annio + '\'' +
+                ", Annio=" + Annio +
+                ", cantidad=" + cantidad +
                 '}';
     }
 }
