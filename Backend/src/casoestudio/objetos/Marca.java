@@ -1,6 +1,6 @@
 package casoestudio.objetos;
 
-public class Marca {
+public class Marca extends MarcaModelo{
     private String marca;
 
     public String getMarca() {

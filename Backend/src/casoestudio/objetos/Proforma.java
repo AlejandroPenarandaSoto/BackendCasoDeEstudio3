@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 public class Proforma {
     private ArrayList<Repuesto> lineasProformas;
-    private Vendedor vendedor;
     private String codigo;
     private String estado;
 
-    public Proforma(ArrayList<Repuesto> lineasProformas, Vendedor vendedor, String codigo, String estado) {
+    public Proforma(ArrayList<Repuesto> lineasProformas, String codigo, String estado) {
         this.lineasProformas = lineasProformas;
-        this.vendedor = vendedor;
         this.codigo = codigo;
         this.estado = estado;
     }
@@ -21,14 +19,6 @@ public class Proforma {
 
     public void setLineasProformas(ArrayList<Repuesto> lineasProformas) {
         this.lineasProformas = lineasProformas;
-    }
-
-    public Vendedor getVendedor() {
-        return vendedor;
-    }
-
-    public void setVendedor(Vendedor vendedor) {
-        this.vendedor = vendedor;
     }
 
     public String getCodigo() {
@@ -51,7 +41,6 @@ public class Proforma {
     public String toString() {
         return "Proforma{" +
                 "lineasProformas=" + lineasProformas +
-                ", vendedor=" + vendedor +
                 ", codigo='" + codigo + '\'' +
                 ", estado='" + estado + '\'' +
                 '}';
