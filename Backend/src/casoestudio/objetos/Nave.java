@@ -21,6 +21,9 @@ public class Nave {
         this.propulsores = propulsores;
     }
 
+    public Nave() {
+    }
+
     public String getCategoria() {
         return categoria;
     }
