@@ -7,18 +7,18 @@ public class Nave {
     private int anio;
     private int codigo;
     private String color;
-    private boolean escudo;
-    private boolean hipervelocidad;
+    private String  motor;
+    private String propulsores;
 
-    public Nave(String categoria, String marca, String modelo, int anio, int codigo, String color, boolean escudo, boolean hipervelocidad) {
+    public Nave(String categoria, String marca, String modelo, int anio, int codigo, String color, String motor, String propulsores) {
         this.categoria = categoria;
         this.marca = marca;
         this.modelo = modelo;
         this.anio = anio;
         this.codigo = codigo;
         this.color = color;
-        this.escudo = escudo;
-        this.hipervelocidad = hipervelocidad;
+        this.motor = motor;
+        this.propulsores = propulsores;
     }
 
     public String getCategoria() {
@@ -69,20 +69,20 @@ public class Nave {
         this.color = color;
     }
 
-    public boolean isEscudo() {
-        return escudo;
+    public String getMotor() {
+        return motor;
     }
 
-    public void setEscudo(boolean escudo) {
-        this.escudo = escudo;
+    public void setMotor(String motor) {
+        this.motor = motor;
     }
 
-    public boolean isHipervelocidad() {
-        return hipervelocidad;
+    public String getPropulsores() {
+        return propulsores;
     }
 
-    public void setHipervelocidad(boolean hipervelocidad) {
-        this.hipervelocidad = hipervelocidad;
+    public void setPropulsores(String propulsores) {
+        this.propulsores = propulsores;
     }
 
     @Override
@@ -94,8 +94,8 @@ public class Nave {
                 ", anio=" + anio +
                 ", codigo=" + codigo +
                 ", color='" + color + '\'' +
-                ", escudo=" + escudo +
-                ", hipervelocidad=" + hipervelocidad +
+                ", motor='" + motor + '\'' +
+                ", propulsores='" + propulsores + '\'' +
                 '}';
     }
 }

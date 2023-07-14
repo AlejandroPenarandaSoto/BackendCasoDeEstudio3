@@ -5,13 +5,16 @@ import java.util.ArrayList;
 public class Cliente {
     private int Telefono;
     private String Nombre;
+    private String contrasenia;
     private String Apellido1;
     private String Apellido2;
     private ArrayList<Nave> Naves;
 
-    public Cliente(int telefono, String nombre, String apellido1, String apellido2, ArrayList<Nave> naves) {
+
+    public Cliente(int telefono, String nombre, String contrasenia, String apellido1, String apellido2, ArrayList<Nave> naves) {
         Telefono = telefono;
         Nombre = nombre;
+        this.contrasenia = contrasenia;
         Apellido1 = apellido1;
         Apellido2 = apellido2;
         Naves = naves;
@@ -57,11 +60,20 @@ public class Cliente {
         Naves = naves;
     }
 
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
     @Override
     public String toString() {
         return "Cliente{" +
                 "Telefono=" + Telefono +
                 ", Nombre='" + Nombre + '\'' +
+                ", contrasenia='" + contrasenia + '\'' +
                 ", Apellido1='" + Apellido1 + '\'' +
                 ", Apellido2='" + Apellido2 + '\'' +
                 ", Naves=" + Naves +
