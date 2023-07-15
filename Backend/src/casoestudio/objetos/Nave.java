@@ -1,16 +1,18 @@
 package casoestudio.objetos;
 
+import casoestudio.producto_Concreto._Usuarios;
+
 public class Nave {
    private int idNave;
    private String codigo;
    private String color;
    private String motor;
    private String propulsores;
-   private Usuario id_usuario;
+   private _Usuarios id_usuario;
    private MarcaModelo marcaM;
    private Categoria catN;
 
-   public Nave(int idNave, String codigo, String color, String motor, String propulsores, Usuario id_usuario, MarcaModelo marcaM, Categoria catN) {
+   public Nave(int idNave, String codigo, String color, String motor, String propulsores, _Usuarios id_usuario, MarcaModelo marcaM, Categoria catN) {
       this.idNave = idNave;
       this.codigo = codigo;
       this.color = color;
@@ -64,11 +66,11 @@ public class Nave {
       this.propulsores = propulsores;
    }
 
-   public Usuario getId_usuario() {
+   public _Usuarios getId_usuario() {
       return id_usuario;
    }
 
-   public void setId_usuario(Usuario id_usuario) {
+   public void setId_usuario(_Usuarios id_usuario) {
       this.id_usuario = id_usuario;
    }
 
