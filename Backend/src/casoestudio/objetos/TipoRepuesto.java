@@ -1,6 +1,6 @@
 package casoestudio.objetos;
 
-public class TipoRepuesto extends Repuesto{
+public class TipoRepuesto{
 
     private String Tipo;
 
@@ -12,8 +12,7 @@ public class TipoRepuesto extends Repuesto{
         Tipo = tipo;
     }
 
-    public TipoRepuesto(String nombre, String descripcion, int codID, String categoria, String modelo, int precio, String annio, String tipo) {
-        super(nombre, descripcion, codID, categoria, modelo, precio, annio);
+    public TipoRepuesto(String tipo) {
         Tipo = tipo;
     }
 

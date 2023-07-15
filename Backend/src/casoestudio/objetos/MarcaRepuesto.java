@@ -1,6 +1,6 @@
 package casoestudio.objetos;
 
-public class MarcaRepuesto extends Repuesto{
+public class MarcaRepuesto{
 
     private String Marca;
 
@@ -12,8 +12,7 @@ public class MarcaRepuesto extends Repuesto{
         Marca = marca;
     }
 
-    public MarcaRepuesto(String nombre, String descripcion, int codID, String categoria, String modelo, int precio, String annio, String marca) {
-        super(nombre, descripcion, codID, categoria, modelo, precio, annio);
+    public MarcaRepuesto(String marca) {
         Marca = marca;
     }
 

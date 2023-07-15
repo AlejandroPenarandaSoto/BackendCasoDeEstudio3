@@ -7,14 +7,18 @@ public class Nave {
    private String motor;
    private String propulsores;
    private Usuario id_usuario;
+   private MarcaModelo marcaM;
+   private Categoria catN;
 
-   public Nave(int idNave, String codigo, String color, String motor, String propulsores, Usuario id_usuario) {
+   public Nave(int idNave, String codigo, String color, String motor, String propulsores, Usuario id_usuario, MarcaModelo marcaM, Categoria catN) {
       this.idNave = idNave;
       this.codigo = codigo;
       this.color = color;
       this.motor = motor;
       this.propulsores = propulsores;
       this.id_usuario = id_usuario;
+      this.marcaM = marcaM;
+      this.catN = catN;
    }
 
    public Nave() {
@@ -66,5 +70,35 @@ public class Nave {
 
    public void setId_usuario(Usuario id_usuario) {
       this.id_usuario = id_usuario;
+   }
+
+   public MarcaModelo getMarcaM() {
+      return marcaM;
+   }
+
+   public void setMarcaM(MarcaModelo marcaM) {
+      this.marcaM = marcaM;
+   }
+
+   public Categoria getCatN() {
+      return catN;
+   }
+
+   public void setCatN(Categoria catN) {
+      this.catN = catN;
+   }
+
+   @Override
+   public String toString() {
+      return "Nave{" +
+              "idNave=" + idNave +
+              ", codigo='" + codigo + '\'' +
+              ", color='" + color + '\'' +
+              ", motor='" + motor + '\'' +
+              ", propulsores='" + propulsores + '\'' +
+              ", id_usuario=" + id_usuario +
+              ", marcaM=" + marcaM +
+              ", catN=" + catN +
+              '}';
    }
 }

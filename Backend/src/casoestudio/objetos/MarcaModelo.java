@@ -1,16 +1,9 @@
 package casoestudio.objetos;
 
 public class MarcaModelo {
-    private int marcaModelo;
     private int anio;
-
-    public int getMarcaModelo() {
-        return marcaModelo;
-    }
-
-    public void setMarcaModelo(int marcaModelo) {
-        this.marcaModelo = marcaModelo;
-    }
+    private Marca marcaN;
+    private Modelo modeloN;
 
     public int getAnio() {
         return anio;
@@ -20,12 +13,27 @@ public class MarcaModelo {
         this.anio = anio;
     }
 
-    public MarcaModelo(int marcaModelo, int anio) {
-        this.marcaModelo = marcaModelo;
-        this.anio = anio;
+    public Marca getMarcaN() {
+        return marcaN;
     }
 
+    public void setMarcaN(Marca marcaN) {
+        this.marcaN = marcaN;
+    }
 
+    public Modelo getModeloN() {
+        return modeloN;
+    }
+
+    public void setModeloN(Modelo modeloN) {
+        this.modeloN = modeloN;
+    }
+
+    public MarcaModelo(int anio, Marca marcaN, Modelo modeloN) {
+        this.anio = anio;
+        this.marcaN = marcaN;
+        this.modeloN = modeloN;
+    }
 
     public MarcaModelo() {
     }
@@ -33,8 +41,9 @@ public class MarcaModelo {
     @Override
     public String toString() {
         return "MarcaModelo{" +
-                "marcaModelo=" + marcaModelo +
-                ", anio=" + anio +
+                "anio=" + anio +
+                ", marcaN=" + marcaN +
+                ", modeloN=" + modeloN +
                 '}';
     }
 }

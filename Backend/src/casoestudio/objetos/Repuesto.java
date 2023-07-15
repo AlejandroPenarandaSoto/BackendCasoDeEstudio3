@@ -11,8 +11,10 @@ public class Repuesto {
     private int Precio;
     private int Annio;
     private int cantidad;
+    private MarcaRepuesto marcaR;
+    private TipoRepuesto tipoR;
 
-    public Repuesto(String nombre, String descripcion, int codID, String categoria, String modelo, int precio, int annio, int cantidad) {
+    public Repuesto(String nombre, String descripcion, int codID, String categoria, String modelo, int precio, int annio, int cantidad, MarcaRepuesto marcaR, TipoRepuesto tipoR) {
         Nombre = nombre;
         Descripcion = descripcion;
         this.codID = codID;
@@ -21,6 +23,8 @@ public class Repuesto {
         Precio = precio;
         Annio = annio;
         this.cantidad = cantidad;
+        this.marcaR = marcaR;
+        this.tipoR = tipoR;
     }
 
     public String getNombre() {
@@ -87,6 +91,22 @@ public class Repuesto {
         this.cantidad = cantidad;
     }
 
+    public MarcaRepuesto getMarcaR() {
+        return marcaR;
+    }
+
+    public void setMarcaR(MarcaRepuesto marcaR) {
+        this.marcaR = marcaR;
+    }
+
+    public TipoRepuesto getTipoR() {
+        return tipoR;
+    }
+
+    public void setTipoR(TipoRepuesto tipoR) {
+        this.tipoR = tipoR;
+    }
+
     @Override
     public String toString() {
         return "Repuesto{" +
@@ -98,6 +118,8 @@ public class Repuesto {
                 ", Precio=" + Precio +
                 ", Annio=" + Annio +
                 ", cantidad=" + cantidad +
+                ", marcaR=" + marcaR +
+                ", tipoR=" + tipoR +
                 '}';
     }
 }
