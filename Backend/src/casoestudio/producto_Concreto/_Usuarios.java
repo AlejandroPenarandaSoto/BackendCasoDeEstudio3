@@ -95,4 +95,14 @@ public class _Usuarios implements _Usuario {
 
     }
 
+    @Override
+    public String toString() {
+        return "_Usuarios{" +
+                "nombre='" + nombre + '\'' +
+                ", apellido1='" + apellido1 + '\'' +
+                ", apellido2='" + apellido2 + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", rol_id=" + rol_id +
+                '}';
+    }
 }
