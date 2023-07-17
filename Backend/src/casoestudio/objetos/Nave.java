@@ -3,7 +3,7 @@ package casoestudio.objetos;
 import casoestudio.producto_Concreto._Usuarios;
 
 public class Nave {
-   private int idNave;
+
    private String codigo;
    private String color;
    private String motor;
@@ -12,8 +12,7 @@ public class Nave {
    private MarcaModelo marcaM;
    private Categoria catN;
 
-   public Nave(int idNave, String codigo, String color, String motor, String propulsores, _Usuarios id_usuario, MarcaModelo marcaM, Categoria catN) {
-      this.idNave = idNave;
+   public Nave( String codigo, String color, String motor, String propulsores, _Usuarios id_usuario, MarcaModelo marcaM, Categoria catN) {
       this.codigo = codigo;
       this.color = color;
       this.motor = motor;
@@ -26,13 +25,7 @@ public class Nave {
    public Nave() {
    }
 
-   public int getIdNave() {
-      return idNave;
-   }
 
-   public void setIdNave(int idNave) {
-      this.idNave = idNave;
-   }
 
    public String getCodigo() {
       return codigo;
@@ -93,7 +86,6 @@ public class Nave {
    @Override
    public String toString() {
       return "Nave{" +
-              "idNave=" + idNave +
               ", codigo='" + codigo + '\'' +
               ", color='" + color + '\'' +
               ", motor='" + motor + '\'' +

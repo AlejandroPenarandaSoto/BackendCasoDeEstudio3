@@ -5,6 +5,10 @@ public class MarcaModelo {
     private Marca marcaN;
     private Modelo modeloN;
 
+    public MarcaModelo(int anio) {
+        this.anio = anio;
+    }
+
     public int getAnio() {
         return anio;
     }
