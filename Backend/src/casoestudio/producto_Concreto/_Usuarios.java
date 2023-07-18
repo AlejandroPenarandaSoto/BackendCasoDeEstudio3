@@ -25,10 +25,10 @@ public class _Usuarios implements _Usuario {
     }
     @Override
     public void actualizarProforma(Proforma proforma) {
-        if (getRol_id() == 1) {
+        if (getRol_id() == 1) { // Cambiar 1 por el ID correspondiente al vendedor
             System.out.println("Usuario " + getNombre() + " recibió una nueva proforma: " + proforma);
             System.out.println("Mensaje recibido correctamente.");
-
+            // Aquí puedes realizar cualquier acción adicional que requieras cuando se reciba una nueva proforma.
         }
     }
     public void setApellido1(String apellido1) {
