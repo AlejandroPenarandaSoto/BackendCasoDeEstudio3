@@ -1,5 +1,6 @@
 package casoestudio.producto_Concreto;
 
+import casoestudio.objetos.Proforma;
 import casoestudio.producto_abstracto._Usuario;
 
 public class _Usuarios implements _Usuario {
@@ -22,7 +23,14 @@ public class _Usuarios implements _Usuario {
     public String getApellido1() {
         return apellido1;
     }
+    @Override
+    public void actualizarProforma(Proforma proforma) {
+        if (getRol_id() == 1) {
+            System.out.println("Usuario " + getNombre() + " recibió una nueva proforma: " + proforma);
+            System.out.println("Mensaje recibido correctamente.");
 
+        }
+    }
     public void setApellido1(String apellido1) {
         this.apellido1 = apellido1;
     }

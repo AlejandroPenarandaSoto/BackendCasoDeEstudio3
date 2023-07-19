@@ -1,8 +1,10 @@
 package casoestudio.objetos;
 
 import casoestudio.producto_Concreto._Usuarios;
+import casoestudio.producto_abstracto._Usuario;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Proforma {
     private ArrayList<Repuesto> lineasProformas;
@@ -10,6 +12,8 @@ public class Proforma {
     private String estado;
     private ArrayList<Razon> lineasRazones;
     private ArrayList<_Usuarios> listaUsuarios;
+    private List<_Usuario> observadores = new ArrayList<>();
+
 
     public Proforma(ArrayList<Repuesto> lineasProformas, String codigo, String estado, ArrayList<Razon> lineasRazones, ArrayList<_Usuarios> listaUsuarios) {
         this.lineasProformas = lineasProformas;
@@ -22,6 +26,20 @@ public class Proforma {
     public Proforma() {
     }
 
+    public void agregarObservador(_Usuario observador) {
+        observadores.add(observador);
+    }
+
+    public void eliminarObservador(_Usuario observador) {
+        observadores.remove(observador);
+    }
+
+    public void notificarObservadores() {
+        for (_Usuario observador : observadores) {
+            observador.actualizarProforma(this);
+        }
+    }
+
     public ArrayList<Repuesto> getLineasProformas() {
         return lineasProformas;
     }
@@ -29,7 +47,6 @@ public class Proforma {
     public void setLineasProformas(ArrayList<Repuesto> lineasProformas) {
         this.lineasProformas = lineasProformas;
     }
-
     public String getCodigo() {
         return codigo;
     }
