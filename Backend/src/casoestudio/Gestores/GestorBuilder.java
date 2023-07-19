@@ -30,18 +30,13 @@ public class GestorBuilder {
         arrNaves.add(pObj);
     }
 
-    public String obtenerDatos(int pid) {
-        String mResult = "";
-        Nave mOb = (Nave) arrNaves.get(pid);
-        mResult = "Tipo de motor: " + mOb.getMotor() + "\n";
-        return mResult;
-    }
+
 
     public String obtenerDatos() {
         String mResult = "";
 
         Nave mOb;
-        for(Iterator var3 = arrNaves.iterator(); var3.hasNext(); mResult = mResult  + "Tipo de motor: " + mOb.getMotor()) {
+        for(Iterator var3 = arrNaves.iterator(); var3.hasNext(); mResult = mResult  +  "Color: " + mOb.getColor() + "\n"+ "Codigo: " + mOb.getCodigo() + "\n") {
             mOb = (Nave)var3.next();
         }
 
@@ -56,4 +51,3 @@ public class GestorBuilder {
         this.objDirector = objDirector;
     }
 }
-

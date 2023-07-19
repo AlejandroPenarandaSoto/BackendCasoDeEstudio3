@@ -17,8 +17,13 @@ public abstract class Builder {
         this.nave = new Nave();
     }
 
-    public abstract void construirMotor();
-    public abstract void construirPropulsores();
 
 
+    public abstract void construirCodigo();
+
+    public abstract void construirColor();
+
+    public abstract void construiridCategoria();
+    public abstract void construiridMarca();
+    public abstract void construirUsuario();
 }

@@ -1,12 +1,28 @@
 package casoestudio.objetos;
 
+import java.util.ArrayList;
+
 public class MarcaModelo {
+    private int id_marcaM;
     private int anio;
-    private Marca marcaN;
-    private Modelo modeloN;
+    private int marcaId;
+    private int modeloId;
 
     public MarcaModelo(int anio) {
         this.anio = anio;
+    }
+
+    public MarcaModelo(int anio, int marcaId, int modeloId) {
+        this.anio = anio;
+        this.marcaId = marcaId;
+        this.modeloId = modeloId;
+    }
+
+    public MarcaModelo(int id_marcaM, int anio, int marcaId, int modeloId) {
+        this.id_marcaM = id_marcaM;
+        this.anio = anio;
+        this.marcaId = marcaId;
+        this.modeloId = modeloId;
     }
 
     public int getAnio() {
@@ -17,37 +33,37 @@ public class MarcaModelo {
         this.anio = anio;
     }
 
-    public Marca getMarcaN() {
-        return marcaN;
+
+    public int getMarcaId() {
+        return marcaId;
     }
 
-    public void setMarcaN(Marca marcaN) {
-        this.marcaN = marcaN;
+    public int getId_marcaM() {
+        return id_marcaM;
     }
 
-    public Modelo getModeloN() {
-        return modeloN;
+    public void setId_marcaM(int id_marcaM) {
+        this.id_marcaM = id_marcaM;
     }
 
-    public void setModeloN(Modelo modeloN) {
-        this.modeloN = modeloN;
+    public void setMarcaId(int marcaId) {
+        this.marcaId = marcaId;
     }
 
-    public MarcaModelo(int anio, Marca marcaN, Modelo modeloN) {
-        this.anio = anio;
-        this.marcaN = marcaN;
-        this.modeloN = modeloN;
+    public int getModeloId() {
+        return modeloId;
     }
 
-    public MarcaModelo() {
+    public void setModeloId(int modeloId) {
+        this.modeloId = modeloId;
     }
 
     @Override
     public String toString() {
         return "MarcaModelo{" +
                 "anio=" + anio +
-                ", marcaN=" + marcaN +
-                ", modeloN=" + modeloN +
+                ", marcaId=" + marcaId +
+                ", modeloId=" + modeloId +
                 '}';
     }
 }

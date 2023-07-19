@@ -6,20 +6,17 @@ public class Nave {
 
    private String codigo;
    private String color;
-   private String motor;
-   private String propulsores;
-   private _Usuarios id_usuario;
-   private MarcaModelo marcaM;
-   private Categoria catN;
+   private int idCat;
+   private int marcaM;
+   private String nombreU;
 
-   public Nave( String codigo, String color, String motor, String propulsores, _Usuarios id_usuario, MarcaModelo marcaM, Categoria catN) {
-      this.codigo = codigo;
-      this.color = color;
-      this.motor = motor;
-      this.propulsores = propulsores;
-      this.id_usuario = id_usuario;
-      this.marcaM = marcaM;
-      this.catN = catN;
+
+   public Nave(String codigo, String color, int idCat, int marcaM, String nombreU) {
+      this.codigo = "NA";
+      this.color = "NA";
+      this.idCat = idCat;
+      this.marcaM=marcaM;
+      this.nombreU = nombreU;
    }
 
    public Nave() {
@@ -43,56 +40,38 @@ public class Nave {
       this.color = color;
    }
 
-   public String getMotor() {
-      return motor;
+   public int getIdCat() {
+      return idCat;
    }
 
-   public void setMotor(String motor) {
-      this.motor = motor;
+   public void setIdCat(int idCat) {
+      this.idCat = idCat;
    }
 
-   public String getPropulsores() {
-      return propulsores;
-   }
-
-   public void setPropulsores(String propulsores) {
-      this.propulsores = propulsores;
-   }
-
-   public _Usuarios getId_usuario() {
-      return id_usuario;
-   }
-
-   public void setId_usuario(_Usuarios id_usuario) {
-      this.id_usuario = id_usuario;
-   }
-
-   public MarcaModelo getMarcaM() {
+   public int getMarcaM() {
       return marcaM;
    }
 
-   public void setMarcaM(MarcaModelo marcaM) {
+   public void setMarcaM(int marcaM) {
       this.marcaM = marcaM;
    }
 
-   public Categoria getCatN() {
-      return catN;
+   public String getNombreU() {
+      return nombreU;
    }
 
-   public void setCatN(Categoria catN) {
-      this.catN = catN;
+   public void setNombreU(String nombreU) {
+      this.nombreU = nombreU;
    }
 
    @Override
    public String toString() {
       return "Nave{" +
-              ", codigo='" + codigo + '\'' +
+              "codigo='" + codigo + '\'' +
               ", color='" + color + '\'' +
-              ", motor='" + motor + '\'' +
-              ", propulsores='" + propulsores + '\'' +
-              ", id_usuario=" + id_usuario +
+              ", idCat=" + idCat +
               ", marcaM=" + marcaM +
-              ", catN=" + catN +
+              ", nombreU='" + nombreU + '\'' +
               '}';
    }
 }
