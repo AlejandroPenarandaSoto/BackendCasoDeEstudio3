@@ -15,16 +15,12 @@ public class mainPrueba {
     static PrintStream out = System.out;
 
 
-        private static Scanner scanner;
-        private static GestorPrueba appGestor = new GestorPrueba();
+    private static Scanner scanner;
+    private static GestorPrueba appGestor = new GestorPrueba();
 
-        public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
 
-            appGestor.listarUsuarios();
-            for (_Usuarios l:  appGestor.listarUsuarios())
-
-                print(l.toString());
-        }
+    }
     public static void print(String pText) {
 
         print(pText, true);

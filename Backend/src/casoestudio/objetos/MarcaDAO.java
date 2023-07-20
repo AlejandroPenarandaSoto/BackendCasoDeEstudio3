@@ -24,7 +24,6 @@ public class MarcaDAO extends ApiConector {
             HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
             if (response.statusCode() == 200) {
                 String jsonResponse = response.body();
-                System.out.println("JSON response: " + jsonResponse);
                 marcas.addAll(parseMarcasFromResponse(jsonResponse));
             }
         } catch (IOException | InterruptedException e) {
@@ -68,12 +67,7 @@ public class MarcaDAO extends ApiConector {
             HttpResponse resp =this.EjecutarLlamado(mConecc);
             int statusCode = resp.statusCode();
             HttpHeaders headers = resp.headers();
-
             String jsonResponse = (String) resp.body();
-
-            System.out.println("Status code: " + statusCode);
-            System.out.println("Response headers: " + headers);
-            System.out.println("Response body: " + jsonResponse);
         }catch(IOException e){
             e.printStackTrace();
         }catch(InterruptedException e){
@@ -81,7 +75,6 @@ public class MarcaDAO extends ApiConector {
         }
     }
     public int getMarcaId(String marcaValue) {
-        System.out.println("Marca Value: " + marcaValue);
         int marcaId = 0;
         try {
             String query = "SELECT idMarca FROM FgE_Marca WHERE Marca = \"" + marcaValue + "\"";

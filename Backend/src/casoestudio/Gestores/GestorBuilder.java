@@ -5,23 +5,26 @@ import casoestudio.directores.Director;
 import casoestudio.objetos.Nave;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class GestorBuilder {
-    private static ArrayList<Nave> arrNaves = new ArrayList();
+    private static ArrayList<Nave> arrNaves = new ArrayList<>();
     private Director objDirector = new Director();
 
     public GestorBuilder() {
     }
 
-    public void construccion_base() {
+    public void construccion_base(String codigo, String color, int idCategoria, int idMarca, int idUsuario) {
         ConstructorConcreto constructorConcreto = new ConstructorConcreto();
+        constructorConcreto.setCodigo(codigo);
+        constructorConcreto.setColor(color);
+        constructorConcreto.setIdCategoria(idCategoria);
+        constructorConcreto.setIdMarca(idMarca);
+        constructorConcreto.setIdUsuario(idUsuario);
         this.objDirector.setBuilder(constructorConcreto);
         this.nueva_Nave();
     }
 
-
-    private void nueva_Nave() {
+    public void nueva_Nave() {
         this.objDirector.construirNave();
         add_objeto_array(this.objDirector.getBuilder().getNave());
     }
@@ -29,18 +32,8 @@ public class GestorBuilder {
     private static void add_objeto_array(Nave pObj) {
         arrNaves.add(pObj);
     }
-
-
-
-    public String obtenerDatos() {
-        String mResult = "";
-
-        Nave mOb;
-        for(Iterator var3 = arrNaves.iterator(); var3.hasNext(); mResult = mResult  +  "Color: " + mOb.getColor() + "\n"+ "Codigo: " + mOb.getCodigo() + "\n") {
-            mOb = (Nave)var3.next();
-        }
-
-        return mResult;
+    public Nave getNave() {
+        return objDirector.getBuilder().getNave();
     }
 
     public Director getObjDirector() {

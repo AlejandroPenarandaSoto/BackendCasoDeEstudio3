@@ -68,9 +68,6 @@ public class ModeloDAO extends ApiConector {
             int statusCode = resp.statusCode();
             HttpHeaders headers = resp.headers();
             String jsonResponse = (String) resp.body();
-            System.out.println("Status code: " + statusCode);
-            System.out.println("Response headers: " + headers);
-            System.out.println("Response body: " + jsonResponse);
         }catch(IOException e){
             e.printStackTrace();
         }catch(InterruptedException e){

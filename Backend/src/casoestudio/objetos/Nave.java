@@ -8,15 +8,15 @@ public class Nave {
    private String color;
    private int idCat;
    private int marcaM;
-   private String nombreU;
+   private int idU;
 
 
-   public Nave(String codigo, String color, int idCat, int marcaM, String nombreU) {
-      this.codigo = "NA";
-      this.color = "NA";
+   public Nave(String codigo, String color, int idCat, int marcaM, int idU) {
+      this.codigo = codigo;
+      this.color = color;
       this.idCat = idCat;
-      this.marcaM=marcaM;
-      this.nombreU = nombreU;
+      this.marcaM = marcaM;
+      this.idU = idU;
    }
 
    public Nave() {
@@ -56,12 +56,12 @@ public class Nave {
       this.marcaM = marcaM;
    }
 
-   public String getNombreU() {
-      return nombreU;
+   public int getIdU() {
+      return idU;
    }
 
-   public void setNombreU(String nombreU) {
-      this.nombreU = nombreU;
+   public void setIdU(int idU) {
+      this.idU = idU;
    }
 
    @Override
@@ -71,7 +71,7 @@ public class Nave {
               ", color='" + color + '\'' +
               ", idCat=" + idCat +
               ", marcaM=" + marcaM +
-              ", nombreU='" + nombreU + '\'' +
+              ", idU=" + idU +
               '}';
    }
 }

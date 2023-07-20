@@ -1,29 +1,40 @@
 package casoestudio.constructores;
 
-import java.util.Scanner;
+import casoestudio.objetos.Nave;
 
 public class ConstructorConcreto extends Builder {
+    private Nave nave;
+
     public ConstructorConcreto() {
+        nave = new Nave();
     }
 
+    public void setCodigo(String codigo) {
+        nave.setCodigo(codigo);
+    }
 
-    /* @Override
-     public void construirCodigo() {
-         Scanner scanner = new Scanner(System.in);
-         System.out.println("Ingrese el codigo de la nave: ");
-         String codigo = scanner.nextLine();
-         this.nave.setCodigo(codigo);
-     }*/
-    /*@Override
-    public void construirColor() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese el color de la nave: ");
-        String color = scanner.nextLine();
-        this.nave.setColor(color);
-    }*/
-    public void construirCodigo(){
+    public void setColor(String color) {
+        nave.setColor(color);
+    }
+
+    public void setIdCategoria(int idCategoria) {
+        nave.setIdCat(idCategoria);
+    }
+
+    public void setIdMarca(int idMarca) {
+        nave.setMarcaM(idMarca);
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        nave.setIdU(idUsuario);
+    }
+
+    @Override
+    public void construirCodigo() {
 
     }
+
+    @Override
     public void construirColor() {
 
     }
@@ -43,5 +54,8 @@ public class ConstructorConcreto extends Builder {
 
     }
 
-
+    public Nave getNave() {
+        return nave;
+    }
 }
+
