@@ -17,7 +17,7 @@ public class Main {
     static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     static PrintStream out = System.out;
     public static void main(String[] args) throws IOException {
-        scanner= new Scanner(System.in);
+        /*scanner= new Scanner(System.in);
 
         System.out.println("Nombre: ");
         String nombre = scanner.nextLine();
@@ -55,6 +55,6 @@ public class Main {
 
     public static String CrearFabricaUsuarios(Usuarios uFabrica, String nombre , String apellido1, String apellido2, String numCel){
         _Usuario tmpUser = uFabrica.crearUsuario(nombre,apellido1,apellido2,numCel);
-        return tmpUser.get_info_usuario();
+        return tmpUser.get_info_usuario();*/
     }
 }

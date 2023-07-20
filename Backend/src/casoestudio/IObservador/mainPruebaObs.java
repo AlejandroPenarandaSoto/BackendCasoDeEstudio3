@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class mainPruebaObs {
     public static void main(String[] args) {
 
-        ArrayList<Repuesto> repuesto = new ArrayList<>();
+       /* ArrayList<Repuesto> repuesto = new ArrayList<>();
         Proforma proforma1 = new Proforma(repuesto, "PROF001", "Pendiente", new ArrayList<>(), new ArrayList<>());
 
         ArrayList<Repuesto> repuestos = new ArrayList<>();
@@ -23,7 +23,7 @@ public class mainPruebaObs {
 
 
         proforma1.notificarObservadores();
-        proforma2.notificarObservadores();
+        proforma2.notificarObservadores();*/
     }
 
 }

@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="BackendCasoDeEstudio3:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/BackendCasoDeEstudio3_jar</output-path>
+    <root id="archive" name="BackendCasoDeEstudio3.jar">
+      <element id="module-output" name="BackendCasoDeEstudio3" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/ProgramacionObjetos/driver conexión bd/mysql-connector-j-8.0.33.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Documents/ProgramacionObjetos/driver conexión bd/mysql-connector-java-8.0.15.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../gson-2.10.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -1,10 +1,8 @@
 package casoestudio.producto_Concreto;
 
 
-
 import casoestudio.api.ApiConector;
-import casoestudio.objetos.Categoria;
-import casoestudio.objetos.Configuracion;
+import casoestudio.objetos.Proforma;
 import casoestudio.producto_abstracto._Usuario;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -14,11 +12,8 @@ import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.net.http.HttpHeaders;
 import java.net.http.HttpResponse;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.System.out;
 
 public class _UsuarioDAO extends ApiConector {
 
@@ -105,9 +100,6 @@ public class _UsuarioDAO extends ApiConector {
         }
         return  usuarioId ;
     }
-
-
-
     private int parseUIdFromResponse(String jsonResponse) {
         int usuarioId = 0;
         try {
@@ -131,4 +123,81 @@ public class _UsuarioDAO extends ApiConector {
         }
         return usuarioId;
     }
+    public List<String> getVendedores() {
+        List<String> usuarios= new ArrayList<>();
+        try {
+            String query = "SELECT nombre FROM FgE_Usuarios WHERE id_rol = 2";
+            String encodedUrl = this.getAPIURL(query);
+            HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
+            if (response.statusCode() == 200) {
+                String jsonResponse = response.body();
+                usuarios.addAll(parseUsuariosFromResponse(jsonResponse));
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return usuarios;
+    }
+
+    public List<Proforma> getProformasByUsuarioId(int idUsuario) {
+        List<Proforma> proformas = new ArrayList<>();
+        try {
+
+            String query = "SELECT id_proforma, id_Cliente,id_Vendedor,estado FROM FgE_Proformas WHERE id_Vendedor = " + idUsuario;
+
+
+            String encodedUrl = this.getAPIURL(query);
+
+
+            HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
+
+            if (response.statusCode() == 200) {
+                String jsonResponse = response.body();
+                proformas.addAll(parseProformasFromResponse(jsonResponse));
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return proformas;
+    }
+
+    private List<Proforma> parseProformasFromResponse(String jsonResponse) {
+        List<Proforma> parsedProformas = new ArrayList<>();
+
+        try {
+            JsonElement jsonElement = JsonParser.parseString(jsonResponse);
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            boolean success = jsonObject.get("success").getAsBoolean();
+            if (success) {
+                JsonObject dataObject = jsonObject.getAsJsonObject("data");
+                if (dataObject.has("result") && dataObject.get("result").isJsonArray()) {
+                    JsonArray resultArray = dataObject.getAsJsonArray("result");
+                    for (JsonElement element : resultArray) {
+                        JsonObject proformaObject = element.getAsJsonObject();
+                        String estado = proformaObject.get("estado").getAsString();
+                        int idCliente = proformaObject.get("id_Cliente").getAsInt();
+                        int idProforma = proformaObject.get("id_proforma").getAsInt();
+                        int idVendedor=proformaObject.get("id_Vendedor").getAsInt();
+                        Proforma proforma = new Proforma(estado, idCliente,idProforma, idVendedor);
+                        parsedProformas.add(proforma);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return parsedProformas;
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

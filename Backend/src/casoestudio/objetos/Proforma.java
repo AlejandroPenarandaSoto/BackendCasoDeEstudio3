@@ -1,58 +1,34 @@
 package casoestudio.objetos;
 
-import casoestudio.producto_Concreto._Usuarios;
-import casoestudio.producto_abstracto._Usuario;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Proforma {
-    private ArrayList<Repuesto> lineasProformas;
-    private String codigo;
+
     private String estado;
-    private ArrayList<Razon> lineasRazones;
-    private ArrayList<_Usuarios> listaUsuarios;
-    private List<_Usuario> observadores = new ArrayList<>();
+    private int id_Cliente;
+    private int id_Proforma;
+    private int id_Vendedor;
 
-
-    public Proforma(ArrayList<Repuesto> lineasProformas, String codigo, String estado, ArrayList<Razon> lineasRazones, ArrayList<_Usuarios> listaUsuarios) {
-        this.lineasProformas = lineasProformas;
-        this.codigo = codigo;
+    public Proforma(String estado, int id_Cliente, int id_Vendedor) {
         this.estado = estado;
-        this.lineasRazones = lineasRazones;
-        this.listaUsuarios = listaUsuarios;
+        this.id_Cliente = id_Cliente;
+        this.id_Vendedor = id_Vendedor;
+    }
+
+    public Proforma(String estado, int id_Cliente, int id_Proforma, int id_Vendedor) {
+        this.estado = estado;
+        this.id_Cliente = id_Cliente;
+        this.id_Proforma = id_Proforma;
+        this.id_Vendedor = id_Vendedor;
+    }
+
+    public int getId_Proforma() {
+        return id_Proforma;
+    }
+
+    public void setId_Proforma(int id_Proforma) {
+        this.id_Proforma = id_Proforma;
     }
 
     public Proforma() {
-    }
-
-    public void agregarObservador(_Usuario observador) {
-        observadores.add(observador);
-    }
-
-    public void eliminarObservador(_Usuario observador) {
-        observadores.remove(observador);
-    }
-
-    public void notificarObservadores() {
-        for (_Usuario observador : observadores) {
-            observador.actualizarProforma(this);
-        }
-    }
-
-    public ArrayList<Repuesto> getLineasProformas() {
-        return lineasProformas;
-    }
-
-    public void setLineasProformas(ArrayList<Repuesto> lineasProformas) {
-        this.lineasProformas = lineasProformas;
-    }
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getEstado() {
@@ -63,30 +39,28 @@ public class Proforma {
         this.estado = estado;
     }
 
-    public ArrayList<Razon> getLineasRazones() {
-        return lineasRazones;
+    public int getId_Cliente() {
+        return id_Cliente;
     }
 
-    public void setLineasRazones(ArrayList<Razon> lineasRazones) {
-        this.lineasRazones = lineasRazones;
+    public void setId_Cliente(int id_Cliente) {
+        this.id_Cliente = id_Cliente;
     }
 
-    public ArrayList<_Usuarios> getListaUsuarios() {
-        return listaUsuarios;
+    public int getId_Vendedor() {
+        return id_Vendedor;
     }
 
-    public void setListaUsuarios(ArrayList<_Usuarios> listaUsuarios) {
-        this.listaUsuarios = listaUsuarios;
+    public void setId_Vendedor(int id_Vendedor) {
+        this.id_Vendedor = id_Vendedor;
     }
 
     @Override
     public String toString() {
         return "Proforma{" +
-                "lineasProformas=" + lineasProformas +
-                ", codigo='" + codigo + '\'' +
-                ", estado='" + estado + '\'' +
-                ", lineasRazones=" + lineasRazones +
-                ", listaUsuarios=" + listaUsuarios +
+                "estado='" + estado + '\'' +
+                ", id_Cliente=" + id_Cliente +
+                ", id_Vendedor=" + id_Vendedor +
                 '}';
     }
 }
