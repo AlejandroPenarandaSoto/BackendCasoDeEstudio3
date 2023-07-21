@@ -14,6 +14,8 @@ public class Gestor {
     private MarcaModeloDAO mmDAO;
     private _UsuarioDAO uDAO;
     private NaveDAO naveDAO;
+    private ProformaDAO proformaDAO;
+    private RechazoDAO rechazoDAO;
 
     public Gestor() {
     }
@@ -62,5 +64,17 @@ public class Gestor {
         Marca tmpMarca = new Marca(nombre);
         MarcaDAO dao = new MarcaDAO();
         dao.registrarMarca(tmpMarca);
+    }
+
+    public void registrarProforma(String estado, int id_Cliente, int id_Vendedor) {
+        Proforma tmpProforma = new Proforma(estado,id_Cliente,id_Vendedor);
+        ProformaDAO dao = new ProformaDAO();
+        dao.insertarProforma(tmpProforma);
+    }
+
+    public void registrarRazonRechazo(String descripcion) {
+        Rechazo tmpRechazo = new Rechazo(descripcion);
+        RechazoDAO dao = new RechazoDAO();
+        dao.insertarRazonRechazo(tmpRechazo);
     }
 }
