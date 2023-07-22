@@ -233,8 +233,31 @@ public class _UsuarioDAO extends ApiConector {
 
         return parsedProformas;
     }
+    private int parseidRolFromResponse(String jsonResponse) {
+        int id_rol = 0;
+        try {
+            JsonParser parser = new JsonParser();
+            JsonObject jsonObject = parser.parse(jsonResponse).getAsJsonObject();
 
-    public int getUsuarioIdByUsername(String usuarioValue) {
+            if (jsonObject.has("data")) {
+                JsonObject dataObject = jsonObject.getAsJsonObject("data");
+                if (dataObject.has("result")) {
+                    JsonArray resultArray = dataObject.getAsJsonArray("result");
+                    if (!resultArray.isJsonNull() && resultArray.size() > 0) {
+                        JsonObject marcaObject = resultArray.get(0).getAsJsonObject();
+                        if (marcaObject.has("id_rol")) {
+                            id_rol = marcaObject.get("id_rol").getAsInt();
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id_rol;
+    }
+
+    public int getIdRolByUsername(String usuarioValue) {
         int idRol = 0;
         try {
             String query = "SELECT id_rol FROM FgE_Usuarios WHERE usuario = \"" + usuarioValue + "\"";
@@ -242,7 +265,7 @@ public class _UsuarioDAO extends ApiConector {
             HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
             if (response.statusCode() == 200) {
                 String jsonResponse = response.body();
-                idRol  = parseUIdFromResponse(jsonResponse);
+                idRol  = parseidRolFromResponse(jsonResponse);
             }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -281,23 +304,7 @@ public class _UsuarioDAO extends ApiConector {
         return pswd;
     }
 
-    public void validateLogin(String username, String pswd){
-        String _pswd= " ";
-        String _user = " ";
-        try {
-            String query = "SELECT * FROM FgE_Usuarios WHERE usuario = \"" + username + "\" AND contrasenia = \""+pswd+"\" ";
-            String encodedUrl = this.getAPIURL(query);
-            HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
-            if (response.statusCode() == 200) {
-                String jsonResponse = response.body();
-                _pswd  = parsePswdFromResponse(jsonResponse);
-                _user = parsePswdFromResponse(jsonResponse);
-            }
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
 
-    }
 
     public _Usuarios getDataUser(String usr) {
         _Usuarios usuario = new _Usuarios();

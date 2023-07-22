@@ -85,32 +85,24 @@ public class Gestor {
     public int getUsuarioIdByUser(String username){
         int id = 0;
         _UsuarioDAO dao = new _UsuarioDAO();
-         id = dao.getUsuarioIdByUsername(username);
+         id = dao.getIdRolByUsername(username);
 
          return id;
     }
 
     public String getUsername(String _user){
-        String user = " ";
         _UsuarioDAO dao = new _UsuarioDAO();
-        dao.getUsername(_user);
+        String user =  dao.getUsername(_user);
         return user;
     }
 
     public String getPswd(String _pswd){
-        String pswd = " ";
         _UsuarioDAO dao = new _UsuarioDAO();
-        dao.getPswd(_pswd);
+        String pswd = dao.getPswd(_pswd);
         return pswd;
     }
 
-    public boolean Login(String user, String pswd){
-        _UsuarioDAO dao = new _UsuarioDAO();
-        dao.validateLogin(user,pswd);
 
-
-        return false;
-    }
 
 
     //funciones Luis
