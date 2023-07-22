@@ -76,6 +76,11 @@ public class Gestor {
         RechazoDAO dao = new RechazoDAO();
         dao.insertarRazonRechazo(tmpRechazo);
     }
+    public  void registrarDetalleProf(int id_detalle, int id_proforma, int id_repuesto, String estado, int id_rechazo){
+        DetalleProforma tmpDetalle = new DetalleProforma(id_proforma, id_repuesto, estado, id_rechazo, id_detalle);
+        ProformaDetalleDAO dao = new ProformaDetalleDAO();
+        dao.insertarDetalleProforma(tmpDetalle);
+    }
 
     public int getUsuarioIdByUser(String username){
         int id = 0;
