@@ -13,7 +13,7 @@ public class ProformaDetalleDAO extends ApiConector {
     public void insertarDetalleProforma(DetalleProforma d) {
         try {
             String mConecc = this.getAPIURL("INSERT INTO FgE_DetalleProforma (id_detalle, id_proforma, id_repuesto,id_razonRechazo ,estado ) " +
-                    "VALUES ('" + d.getId_Proforma() + "', '" + d.getId_Repuesto() + "', '" + d.getId_Rechazo() + "', '" + d.getEstado() + "');");
+                    "VALUES ('" + d.getId_detalle() + "', '" + d.getId_proforma() + "', '" + d.getId_repuesto() + "', '" + d.getId_rechazo()+ "', '" +d.getEstado()   + "');");
             HttpResponse resp = this.EjecutarLlamado(mConecc);
             int statusCode = resp.statusCode();
             HttpHeaders headers = resp.headers();
@@ -31,18 +31,18 @@ public class ProformaDetalleDAO extends ApiConector {
     }
 
     public List<DetalleProforma> getDetallesProf() {
-        List<DetalleProforma> Detalles = new ArrayList<>();
+        List<DetalleProforma> DetallesList = new ArrayList<>();
         try {
             String mConecc = this.getAPIURL("SELECT * FROM FgE_DetalleProforma");
             HttpResponse resp = this.EjecutarLlamado(mConecc);
             int statusCode = resp.statusCode();
             HttpHeaders headers = resp.headers();
             String jsonResponse = (String) resp.body();
-            Detalles = parseDetallesProforma(jsonResponse);
+            DetallesList = parseDetallesProforma(jsonResponse);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        return Detalles;
+        return DetallesList;
     }
 
     private List<DetalleProforma> parseDetallesProforma(String jsonResponse) {
@@ -53,18 +53,12 @@ public class ProformaDetalleDAO extends ApiConector {
                 JsonArray resultArray = jsonObject.getAsJsonObject("data").getAsJsonArray("result");
                 for (JsonElement element : resultArray) {
                     JsonObject detalleJson = element.getAsJsonObject();
-                    if (detalleJson.get("id_proforma") == null || detalleJson.get("id_repuesto") == null ||
-                            detalleJson.get("estado") == null || detalleJson.get("id_razonRechazo") == null) {
-                        // Si algún campo es nulo, omitimos este detalle y continuamos con el siguiente
-                        continue;
-                    }
-                    int id_Proforma = detalleJson.get("id_proforma").getAsInt();
-                    int id_Repuesto = detalleJson.get("id_repuesto").getAsInt();
-                    String estado = detalleJson.get("estado").getAsString();
-                    int id_Rechazo = detalleJson.get("id_razonRechazo").getAsInt();
-
-                    DetalleProforma detalles = new DetalleProforma(id_Proforma,id_Repuesto,estado,id_Rechazo);
-
+                    int id_detalle = detalleJson.get("id_detalle").isJsonNull() ? 0 : detalleJson.get("id_detalle").getAsInt();
+                    int id_proforma = detalleJson.get("id_proforma").isJsonNull() ? 0 : detalleJson.get("id_proforma").getAsInt();
+                    int id_repuesto = detalleJson.get("id_repuesto").isJsonNull() ? 0 : detalleJson.get("id_repuesto").getAsInt();
+                    String estado = detalleJson.get("estado").isJsonNull() ? "" : detalleJson.get("estado").getAsString();
+                    int id_rechazo = detalleJson.get("id_razonRechazo").isJsonNull() ? 0 : detalleJson.get("id_razonRechazo").getAsInt();
+                    DetalleProforma detalles = new DetalleProforma(id_proforma, id_repuesto, estado, id_rechazo, id_detalle);
                     DetallesProformaList.add(detalles);
                 }
             }
@@ -73,13 +67,8 @@ public class ProformaDetalleDAO extends ApiConector {
         }
         return DetallesProformaList;
     }
-    public List<Rechazo> ObtenerRazonesdeRechazo(){
-        RechazoDAO rechazoDAO = new RechazoDAO();
-        return rechazoDAO.getRazonesRechazo();
-    }
-    public  List<Repuesto> getRepuesto(){
-        RepuestoDAO repuestoDAO = new RepuestoDAO();
-        return repuestoDAO.getRepuesto();
-    }
+
+
+
 }
 
