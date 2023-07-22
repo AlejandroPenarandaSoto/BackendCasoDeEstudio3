@@ -5,24 +5,24 @@ import java.util.ArrayList;
 public class Repuesto {
     private String Nombre;
     private String Descripcion;
-    private int codID;
+   // private int codID;
     private String Categoria;
-    private String Modelo;
+  //  private String Modelo;
     private int Precio;
-    private int Annio;
-    private int cantidad;
-    private MarcaRepuesto marcaR;
-    private TipoRepuesto tipoR;
+   // private int Annio;
+  //  private int cantidad;
+    private int marcaR;
+    private int tipoR;
 
-    public Repuesto(String nombre, String descripcion, int codID, String categoria, String modelo, int precio, int annio, int cantidad, MarcaRepuesto marcaR, TipoRepuesto tipoR) {
+    public Repuesto( int tipoR,String nombre, String descripcion,  String categoria,  int precio,  int marcaR) {
         Nombre = nombre;
         Descripcion = descripcion;
-        this.codID = codID;
+      //  this.codID = codID;
         Categoria = categoria;
-        Modelo = modelo;
+     //   Modelo = modelo;
         Precio = precio;
-        Annio = annio;
-        this.cantidad = cantidad;
+     //   Annio = annio;
+     //   this.cantidad = cantidad;
         this.marcaR = marcaR;
         this.tipoR = tipoR;
     }
@@ -43,13 +43,7 @@ public class Repuesto {
         Descripcion = descripcion;
     }
 
-    public int getCodID() {
-        return codID;
-    }
 
-    public void setCodID(int codID) {
-        this.codID = codID;
-    }
 
     public String getCategoria() {
         return Categoria;
@@ -59,13 +53,7 @@ public class Repuesto {
         Categoria = categoria;
     }
 
-    public String getModelo() {
-        return Modelo;
-    }
 
-    public void setModelo(String modelo) {
-        Modelo = modelo;
-    }
 
     public int getPrecio() {
         return Precio;
@@ -75,35 +63,20 @@ public class Repuesto {
         Precio = precio;
     }
 
-    public Integer getAnnio() {
-        return Annio;
-    }
 
-    public void setAnnio(int annio) {
-        Annio = annio;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public MarcaRepuesto getMarcaR() {
+    public int getMarcaR() {
         return marcaR;
     }
 
-    public void setMarcaR(MarcaRepuesto marcaR) {
+    public void setMarcaR(int marcaR) {
         this.marcaR = marcaR;
     }
 
-    public TipoRepuesto getTipoR() {
+    public int getTipoR() {
         return tipoR;
     }
 
-    public void setTipoR(TipoRepuesto tipoR) {
+    public void setTipoR(int tipoR) {
         this.tipoR = tipoR;
     }
 
@@ -112,12 +85,12 @@ public class Repuesto {
         return "Repuesto{" +
                 "Nombre='" + Nombre + '\'' +
                 ", Descripcion='" + Descripcion + '\'' +
-                ", codID=" + codID +
+
                 ", Categoria='" + Categoria + '\'' +
-                ", Modelo='" + Modelo + '\'' +
+
                 ", Precio=" + Precio +
-                ", Annio=" + Annio +
-                ", cantidad=" + cantidad +
+
+
                 ", marcaR=" + marcaR +
                 ", tipoR=" + tipoR +
                 '}';

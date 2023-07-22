@@ -59,4 +59,60 @@ public class NaveDAO extends ApiConector {
         }
         return NaveList;
     }
+
+//lp
+
+    public Nave getNaveDataUser(String nav) {
+        Nave nave = new Nave();
+        int NavID = Integer.parseInt(nav);
+        try {
+            String mConecc = this.getAPIURL("SELECT * FROM FgE_Naves where id_nave = "+ NavID );
+            HttpResponse resp = this.EjecutarLlamado(mConecc);
+            int statusCode = resp.statusCode();
+            HttpHeaders headers = resp.headers();
+            String jsonResponse = (String) resp.body();
+            nave = parseNave(jsonResponse);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return nave;
+    }
+
+
+
+    private Nave parseNave(String jsonResponse) {
+        Nave nave = new Nave();
+        try {
+            JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
+            if (jsonObject.get("success").getAsBoolean()) {
+                JsonObject dataObject = jsonObject.getAsJsonObject("data");
+                if (dataObject.has("result") && dataObject.get("result").isJsonArray()) {
+                    JsonArray resultArray = dataObject.getAsJsonArray("result");
+                    if (resultArray.size() > 0) { // Verificamos si hay resultados en el arreglo
+                        JsonObject naveModeloJson = resultArray.get(0).getAsJsonObject();
+                        String codigo = naveModeloJson.get("codigo_identificacion").getAsString();
+                        String color = naveModeloJson.get("color").getAsString();
+                        int idCategoria = naveModeloJson.get("id_Categoria").getAsInt();
+                        int idMarcaModelo = naveModeloJson.get("id_MarcaModelo").getAsInt();
+                        int idUsuario = naveModeloJson.get("id_usuario").getAsInt();
+
+                        // Actualizamos los valores de la instancia de Nave con los datos obtenidos
+                        nave.setCodigo(codigo);
+                        nave.setColor(color);
+                        nave.setIdCat(idCategoria);
+                        nave.setMarcaM(idMarcaModelo);
+                        nave.setIdU(idUsuario);
+                    }
+                }
+            }
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        }
+        return nave;
+    }
+
+
+
+
+
 }

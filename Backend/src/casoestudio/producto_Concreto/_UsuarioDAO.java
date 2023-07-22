@@ -4,10 +4,7 @@ package casoestudio.producto_Concreto;
 import casoestudio.api.ApiConector;
 import casoestudio.objetos.Proforma;
 import casoestudio.producto_abstracto._Usuario;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 import java.io.IOException;
 import java.net.http.HttpHeaders;
@@ -282,6 +279,56 @@ public class _UsuarioDAO extends ApiConector {
             e.printStackTrace();
         }
         return  pswd ;
+    }
+
+    public _Usuarios getDataUser(String usr) {
+        _Usuarios usuario = new _Usuarios();
+        int userID = Integer.parseInt(usr);
+        try {
+            String mConecc = this.getAPIURL("SELECT * FROM FgE_Usuarios WHERE id_usuario = " + userID);
+            HttpResponse<String> resp = this.EjecutarLlamado(mConecc);
+            int statusCode = resp.statusCode();
+            if (statusCode == 200) {
+                String jsonResponse = resp.body();
+                usuario = parseUsuario(jsonResponse);
+            } else {
+                System.out.println("Error al obtener datos del usuario. Código de estado: " + statusCode);
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
+
+    private _Usuarios parseUsuario(String jsonResponse) {
+        _Usuarios user = new _Usuarios();
+        try {
+            JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
+            if (jsonObject.get("success").getAsBoolean()) {
+                JsonObject dataObject = jsonObject.getAsJsonObject("data");
+                if (dataObject.has("result") && dataObject.get("result").isJsonArray()) {
+                    JsonArray resultArray = dataObject.getAsJsonArray("result");
+                    if (resultArray.size() > 0) { // Verificamos si hay resultados en el arreglo
+                        JsonObject userModeloJson = resultArray.get(0).getAsJsonObject();
+                        int id_rol = userModeloJson.get("id_rol").getAsInt();
+                        String nombre = userModeloJson.get("nombre").getAsString();
+                        String apellido1 = userModeloJson.get("apellido1").getAsString();
+                        String apellido2 = userModeloJson.get("apellido2").getAsString();
+                        String telefono = userModeloJson.get("telefono").getAsString();
+
+                        // Actualizamos los valores del objeto _Usuarios con los datos obtenidos
+                        user.setRol_id(id_rol);
+                        user.setNombre(nombre);
+                        user.setApellido1(apellido1);
+                        user.setApellido2(apellido2);
+                        user.setTelefono(telefono);
+                    }
+                }
+            }
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
 

@@ -1,8 +1,11 @@
 package casoestudio.producto_Concreto;
 
+import casoestudio.Composite.Componente;
 import casoestudio.producto_abstracto._Usuario;
 
-public class _Usuarios implements _Usuario {
+import java.awt.*;
+
+public class _Usuarios implements _Usuario, Componente {
     private String nombre;
     private String apellido1;
     private String apellido2;
@@ -132,5 +135,10 @@ public class _Usuarios implements _Usuario {
                 ", pswd='" + pswd + '\'' +
                 ", rol_id=" + rol_id +
                 '}';
+    }
+
+    @Override
+    public String getDescripcion() {
+        return "Usuario: " + getNombre() + " " + getApellido1() + " " + getApellido2();
     }
 }

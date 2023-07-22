@@ -1,8 +1,9 @@
 package casoestudio.objetos;
 
+import casoestudio.Composite.Componente;
 import casoestudio.producto_Concreto._Usuarios;
 
-public class Nave {
+public class Nave  implements Componente {
 
    private String codigo;
    private String color;
@@ -73,5 +74,10 @@ public class Nave {
               ", marcaM=" + marcaM +
               ", idU=" + idU +
               '}';
+   }
+
+   @Override
+   public String getDescripcion() {
+      return "Nave: " + getCodigo();
    }
 }

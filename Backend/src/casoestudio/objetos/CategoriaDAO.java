@@ -1,10 +1,7 @@
 package casoestudio.objetos;
 
 import casoestudio.api.ApiConector;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 import java.io.IOException;
 import java.net.http.HttpHeaders;
@@ -108,4 +105,52 @@ public class CategoriaDAO extends ApiConector {
         }
         return catId;
     }
+
+    //lp
+
+    public Categoria getDataCategoria(String ctg) {
+        Categoria categoria = new Categoria();
+        int ctgID = Integer.parseInt(ctg);
+        try {
+            String mConecc = this.getAPIURL("SELECT * FROM FgE_Categoria WHERE id_Categoria = " + ctgID);
+            HttpResponse<String> resp = this.EjecutarLlamado(mConecc);
+            int statusCode = resp.statusCode();
+            if (statusCode == 200) {
+                String jsonResponse = resp.body();
+                categoria = parseCategoria(jsonResponse);
+            } else {
+                System.out.println("Error al obtener datos del usuario. Código de estado: " + statusCode);
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return categoria;
+    }
+
+    private Categoria parseCategoria(String jsonResponse) {
+        Categoria ctg = new Categoria();
+        try {
+            JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
+            if (jsonObject.get("success").getAsBoolean()) {
+                JsonObject dataObject = jsonObject.getAsJsonObject("data");
+                if (dataObject.has("result") && dataObject.get("result").isJsonArray()) {
+                    JsonArray resultArray = dataObject.getAsJsonArray("result");
+                    if (resultArray.size() > 0) { // Verificamos si hay resultados en el arreglo
+                        JsonObject categoriaModeloJson = resultArray.get(0).getAsJsonObject();
+                        String categoria = categoriaModeloJson.get("Categoria").getAsString();
+                        // Actualizamos los valores del objeto _Usuarios con los datos obtenidos
+                        ctg.setCategoria(categoria);
+
+                    }
+                }
+            }
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        }
+        return ctg;
+    }
+
+
+
+
 }

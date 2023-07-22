@@ -3,6 +3,7 @@ package casoestudio.Gestores;
 import casoestudio.Fabrica_Abstracta.Usuarios;
 import casoestudio.objetos.*;
 import casoestudio.producto_Concreto._UsuarioDAO;
+import casoestudio.producto_Concreto._Usuarios;
 import casoestudio.producto_abstracto._Usuario;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class Gestor {
     private NaveDAO naveDAO;
     private ProformaDAO proformaDAO;
     private RechazoDAO rechazoDAO;
-
+    private MarcaRepuestoDAO marcaRepuestoDAO;
     public Gestor() {
     }
 
@@ -99,6 +100,66 @@ public class Gestor {
         dao.getPswd(_pswd);
         return pswd;
     }
+
+
+    //funciones Luis
+
+    public void listarMarcaRepuesto(){
+        MarcaRepuestoDAO mr = new MarcaRepuestoDAO();
+        mr.getMarcaRepuesto();
+        mr.getMarcaRepuesto();
+    }
+    public  void registrarMarcaR(String nombre) {
+        MarcaRepuesto tmpMarcaRepuesto = new MarcaRepuesto(nombre);
+        MarcaRepuestoDAO mr = new MarcaRepuestoDAO();
+        mr.registrarMarcaRepuesto(tmpMarcaRepuesto);
+        mr.getMarcaRepuesto();
+    }
+
+    public  void registrarTipoR(String nombre) {
+        TipoRepuesto tmpTipo = new TipoRepuesto(nombre);
+        TipoRepuestoDAO tr = new TipoRepuestoDAO();
+        tr.registrarTipoRepuesto(tmpTipo);
+        tr.getTipoRepuesto();
+    }
+
+
+    public  void registrarRepuesto(int tipoR,String nombre, String descripcion,  String categoria, int precio,int marcaR) {
+        Repuesto tmpRepuesto = new Repuesto(tipoR ,nombre,descripcion,categoria,precio,marcaR);
+        RepuestoDAO rDAO = new RepuestoDAO();
+        rDAO.registrarRepuesto(tmpRepuesto);
+    }
+
+    public  void listarRepuesto() {
+        RepuestoDAO r = new RepuestoDAO();
+        r.getRepuesto();
+
+    }
+
+    public Nave ObtenerNave(String nave) {
+
+        NaveDAO nav = new NaveDAO();
+
+
+        return  nav.getNaveDataUser(nave);
+    }
+
+    public _Usuarios ObtenerUsuario(String user) {
+        _UsuarioDAO usuario = new _UsuarioDAO();
+
+
+        return usuario.getDataUser(user);
+    }
+
+    public Categoria ObtenerCategoria(String ctg) {
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+
+
+        return categoriaDAO.getDataCategoria(ctg);
+    }
+
+
+
 
 
 }

@@ -1,6 +1,8 @@
 package casoestudio.objetos;
 
-public class Categoria {
+import casoestudio.Composite.Componente;
+
+public class Categoria  implements Componente {
     private String categoria;
 
     public String getCategoria() {
@@ -23,5 +25,10 @@ public class Categoria {
         return "Categoria{" +
                 "categoria='" + categoria + '\'' +
                 '}';
+    }
+
+    @Override
+    public String getDescripcion() {
+        return "Categoría: " + getCategoria();
     }
 }
