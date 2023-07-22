@@ -4,6 +4,7 @@ package casoestudio.objetos;
 
 
 import casoestudio.api.ApiConector;
+import com.google.gson.*;
 
 import java.io.IOException;
 import java.net.http.HttpHeaders;
@@ -40,6 +41,30 @@ public class RepuestoDAO extends ApiConector {
             e.printStackTrace();
         }
     }
+    private List<Repuesto> parseRepuestoFromResponse(String jsonResponse) {
+        List<Repuesto> RepuestoList = new ArrayList<>();
+        try {
+            JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
+            if (jsonObject.get("success").getAsBoolean()) {
+                JsonArray resultArray = jsonObject.getAsJsonObject("data").getAsJsonArray("result");
+                for (JsonElement element : resultArray) {
+                    JsonObject repuestoJson = element.getAsJsonObject();
+                    int tipoR = repuestoJson.get("id_TipoRepuesto").getAsInt();
+                    String nombre = repuestoJson.get("nombre").getAsString();
+                    String descripcion = repuestoJson.get("descripcion").getAsString();
+                    String categoria = repuestoJson.get("categoria").getAsString();
+                    int precio = repuestoJson.get("precio").getAsInt();
+                    int marcaR = repuestoJson.get("id_MarcaRespuesto").getAsInt();
+                    Repuesto repuesto = new Repuesto(tipoR, nombre, descripcion, categoria, precio, marcaR);
+                    RepuestoList.add(repuesto);
+                }
+            }
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        }
+        return RepuestoList;
+    }
+
 
     public List<Repuesto> getRepuesto() {
         List<Repuesto> RepuestosList = new ArrayList<>();
@@ -63,6 +88,27 @@ public class RepuestoDAO extends ApiConector {
         }
         return RepuestosList;
     }
-
+    private List<Nave> parseNaveFromResponse(String jsonResponse) {
+        List<Nave> NaveList = new ArrayList<>();
+        try {
+            JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
+            if (jsonObject.get("success").getAsBoolean()) {
+                JsonArray resultArray = jsonObject.getAsJsonObject("data").getAsJsonArray("result");
+                for (JsonElement element : resultArray) {
+                    JsonObject naveModeloJson = element.getAsJsonObject();
+                    String codigo = naveModeloJson.get("codigo_identificacion").getAsString();
+                    String color = naveModeloJson.get("color").getAsString();
+                    int idMarcaModelo = naveModeloJson.get("id_MarcaModelo").getAsInt();
+                    int idU = naveModeloJson.get("id_usuario").getAsInt();
+                    int idCat = naveModeloJson.get("id_Categoria").getAsInt();
+                    Nave nave = new Nave(codigo, color, idCat, idMarcaModelo, idU);
+                    NaveList.add(nave);
+                }
+            }
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        }
+        return NaveList;
+    }
 
 }
