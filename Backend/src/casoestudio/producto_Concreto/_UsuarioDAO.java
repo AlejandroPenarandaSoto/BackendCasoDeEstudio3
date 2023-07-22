@@ -90,7 +90,14 @@ public class _UsuarioDAO extends ApiConector {
             HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
             if (response.statusCode() == 200) {
                 String jsonResponse = response.body();
+                int statusCode = response.statusCode();
                 usuarioId  = parseUIdFromResponse(jsonResponse);
+                HttpHeaders headers = response.headers();
+
+                System.out.println("Status code: " + statusCode);
+                System.out.println("Response headers: " + headers);
+                System.out.println("Response body: " + jsonResponse);
+
             }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -357,7 +364,51 @@ public class _UsuarioDAO extends ApiConector {
     }
 
 
+    public int getUsuarioId(String usuarioValue) {
+        int usuarioId = 0;
+        try {
+            String query = "SELECT id_usuario FROM FgE_Usuarios WHERE usuario = \"" + usuarioValue + "\"";
+            String encodedUrl = this.getAPIURL(query);
+            HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
+            if (response.statusCode() == 200) {
+                String jsonResponse = response.body();
+                int statusCode = response.statusCode();
+                usuarioId  = parseUId(jsonResponse);
+                HttpHeaders headers = response.headers();
 
+                System.out.println("Status code: " + statusCode);
+                System.out.println("Response headers: " + headers);
+                System.out.println("Response body: " + jsonResponse);
+
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return  usuarioId ;
+    }
+    private int parseUId(String jsonResponse) {
+        int usuarioId = 0;
+        try {
+            JsonParser parser = new JsonParser();
+            JsonObject jsonObject = parser.parse(jsonResponse).getAsJsonObject();
+
+            if (jsonObject.has("data")) {
+                JsonObject dataObject = jsonObject.getAsJsonObject("data");
+                if (dataObject.has("result")) {
+                    JsonArray resultArray = dataObject.getAsJsonArray("result");
+                    if (!resultArray.isJsonNull() && resultArray.size() > 0) {
+                        JsonObject marcaObject = resultArray.get(0).getAsJsonObject();
+                        if (marcaObject.has("id_usuario")) {
+                            usuarioId = marcaObject.get("id_usuario").getAsInt();
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return usuarioId;
+    }
 
 
 

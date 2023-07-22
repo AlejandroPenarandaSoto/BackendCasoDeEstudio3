@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.http.HttpHeaders;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class NaveDAO extends ApiConector {
@@ -82,21 +83,20 @@ public class NaveDAO extends ApiConector {
 
     private Nave parseNave(String jsonResponse) {
         Nave nave = new Nave();
+
         try {
             JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
             if (jsonObject.get("success").getAsBoolean()) {
                 JsonObject dataObject = jsonObject.getAsJsonObject("data");
                 if (dataObject.has("result") && dataObject.get("result").isJsonArray()) {
                     JsonArray resultArray = dataObject.getAsJsonArray("result");
-                    if (resultArray.size() > 0) { // Verificamos si hay resultados en el arreglo
+                    if (resultArray.size() > 0) {
                         JsonObject naveModeloJson = resultArray.get(0).getAsJsonObject();
                         String codigo = naveModeloJson.get("codigo_identificacion").getAsString();
                         String color = naveModeloJson.get("color").getAsString();
                         int idCategoria = naveModeloJson.get("id_Categoria").getAsInt();
                         int idMarcaModelo = naveModeloJson.get("id_MarcaModelo").getAsInt();
                         int idUsuario = naveModeloJson.get("id_usuario").getAsInt();
-
-                        // Actualizamos los valores de la instancia de Nave con los datos obtenidos
                         nave.setCodigo(codigo);
                         nave.setColor(color);
                         nave.setIdCat(idCategoria);
@@ -105,14 +105,71 @@ public class NaveDAO extends ApiConector {
                     }
                 }
             }
-        } catch (JsonParseException e) {
+        } catch (JsonParseException | IllegalStateException e) {
             e.printStackTrace();
+            // Si hay un error al analizar el JSON, devuelve una instancia de Nave vacía o nula
+            nave = null;
         }
+
         return nave;
     }
 
 
 
+    public List<Nave> getNaveUser(int iduser) {
+        List<Nave> naveList = new ArrayList<>();
+
+        try {
+            String mConecc = this.getAPIURL("SELECT * FROM FgE_Naves WHERE id_usuario = " + iduser );
+            HttpResponse resp = this.EjecutarLlamado(mConecc);
+            int statusCode = resp.statusCode();
+            HttpHeaders headers = resp.headers();
+
+            String jsonResponse = (String) resp.body();
+
+            System.out.println("Status code: " + statusCode);
+            System.out.println("Response headers: " + headers);
+            System.out.println("Response body: " + jsonResponse);
+
+            naveList = parseNaveUsuario(jsonResponse); // Asignar el resultado del método parseNave al List naveList
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return naveList;
+    }
+
+
+
+    private List<Nave> parseNaveUsuario(String jsonResponse) {
+        List<Nave> naveList = new ArrayList<>();
+        try {
+            JsonElement jsonElement = JsonParser.parseString(jsonResponse);
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            boolean success = jsonObject.get("success").getAsBoolean();
+            if (success) {
+                JsonObject dataObject = jsonObject.getAsJsonObject("data");
+                if (dataObject.has("result") && dataObject.get("result").isJsonArray()) {
+                    JsonArray resultArray = dataObject.getAsJsonArray("result");
+                    Iterator var8 = resultArray.iterator();
+
+                    while(var8.hasNext()) {
+                        JsonElement element = (JsonElement)var8.next();
+                        JsonObject naveUserJson = element.getAsJsonObject();
+                        String codigo = naveUserJson.get("id_nave").getAsString();
+                        String color = naveUserJson.get("color").getAsString();
+                        int idCategoria = naveUserJson.get("id_Categoria").getAsInt();
+                        int idMarcaModelo = naveUserJson.get("id_MarcaModelo").getAsInt();
+                        int idUsuario = naveUserJson.get("id_usuario").getAsInt();
+                        Nave nave = new Nave(codigo, color, idCategoria, idMarcaModelo, idUsuario);
+                        naveList.add(nave);
+                    }
+                }
+            }
+        } catch (Exception var16) {
+            var16.printStackTrace();
+        }
+        return naveList;
+    }
 
 
 }

@@ -84,7 +84,13 @@ public class _Usuarios implements _Usuario, Componente {
         this.pswd = _pswd;
     }
 
-
+    public _Usuarios(String nombre, String apellido1, String apellido2, String telefono, int rol_id) {
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.telefono = telefono;
+        this.rol_id = rol_id;
+    }
 
     public _Usuarios(String nombre, String apellido1, String apellido2, String telefono, String usuario, String pswd) {
         this.nombre = nombre;

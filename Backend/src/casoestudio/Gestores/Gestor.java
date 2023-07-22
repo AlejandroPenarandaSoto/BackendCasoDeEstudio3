@@ -90,6 +90,17 @@ public class Gestor {
          return id;
     }
 
+    public int getUsuarioId(String username){
+        int iduser = 0;
+        _UsuarioDAO dao = new _UsuarioDAO();
+        iduser = dao.getUsuariosId(username);
+
+        return iduser;
+    }
+
+
+
+
     public String getUsername(String _user){
         _UsuarioDAO dao = new _UsuarioDAO();
         String user =  dao.getUsername(_user);
@@ -145,6 +156,14 @@ public class Gestor {
 
 
         return  nav.getNaveDataUser(nave);
+    }
+
+    public Nave getNavelist(Integer idUser) {
+
+        NaveDAO nav = new NaveDAO();
+
+
+        return (Nave) nav.getNaveUser(idUser);
     }
 
     public _Usuarios ObtenerUsuario(String user) {

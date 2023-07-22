@@ -2,6 +2,7 @@ package casoestudio.producto_Concreto;
 
 import casoestudio.Fabrica_Abstracta.Usuarios;
 import casoestudio.Gestores.Gestor;
+import casoestudio.objetos.NaveDAO;
 import casoestudio.producto_Concreto.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,6 +21,9 @@ public class mainPrueba {
     private static Gestor appGestor = new Gestor();
 
     public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
+        NaveDAO  naveDAO = new NaveDAO();
+        _UsuarioDAO usuarioDAO = new _UsuarioDAO();
+
 
 
     }
