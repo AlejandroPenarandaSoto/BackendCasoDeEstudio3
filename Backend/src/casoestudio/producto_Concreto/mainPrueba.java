@@ -20,8 +20,7 @@ public class mainPrueba {
     private static Gestor appGestor = new Gestor();
 
     public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
-        String user = appGestor.getUsername("manu1");
-        System.out.println(user);
+
 
     }
     public static void print(String pText) {

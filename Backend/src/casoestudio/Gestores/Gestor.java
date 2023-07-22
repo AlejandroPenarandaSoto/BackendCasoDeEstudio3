@@ -6,8 +6,6 @@ import casoestudio.producto_Concreto._UsuarioDAO;
 import casoestudio.producto_Concreto._Usuarios;
 import casoestudio.producto_abstracto._Usuario;
 
-import java.util.ArrayList;
-
 public class Gestor {
     private CategoriaDAO catDAO;
     private MarcaDAO marDAO;
@@ -99,6 +97,14 @@ public class Gestor {
         _UsuarioDAO dao = new _UsuarioDAO();
         dao.getPswd(_pswd);
         return pswd;
+    }
+
+    public boolean Login(String user, String pswd){
+        _UsuarioDAO dao = new _UsuarioDAO();
+        dao.validateLogin(user,pswd);
+
+
+        return false;
     }
 
 

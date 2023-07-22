@@ -268,7 +268,7 @@ public class _UsuarioDAO extends ApiConector {
     public String getPswd(String _pswd) {
         String pswd = " ";
         try {
-            String query = "SELECT contrasenia FROM FgE_Usuarios WHERE contrasenia = \"" + _pswd + "\"";
+            String query = "SELECT * FROM FgE_Usuarios WHERE contrasenia = \"" + _pswd + "\"";
             String encodedUrl = this.getAPIURL(query);
             HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
             if (response.statusCode() == 200) {
@@ -278,7 +278,25 @@ public class _UsuarioDAO extends ApiConector {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        return  pswd ;
+        return pswd;
+    }
+
+    public void validateLogin(String username, String pswd){
+        String _pswd= " ";
+        String _user = " ";
+        try {
+            String query = "SELECT * FROM FgE_Usuarios WHERE usuario = \"" + username + "\" AND contrasenia = \""+pswd+"\" ";
+            String encodedUrl = this.getAPIURL(query);
+            HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
+            if (response.statusCode() == 200) {
+                String jsonResponse = response.body();
+                _pswd  = parsePswdFromResponse(jsonResponse);
+                _user = parsePswdFromResponse(jsonResponse);
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public _Usuarios getDataUser(String usr) {
