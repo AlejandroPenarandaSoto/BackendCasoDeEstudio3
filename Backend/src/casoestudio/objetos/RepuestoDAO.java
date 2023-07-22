@@ -78,8 +78,39 @@ public class RepuestoDAO extends ApiConector {
         }
         return RepuestoList;
     }
+    public int getRepuestoId(String des) {
+        int repuestoID = 0;
+        try {
+            String query = "SELECT id_Repuesto FROM FgE_Repuestos WHERE descripcion = '" + des + "'";
+            String encodedUrl = this.getAPIURL(query);
+            HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
+            if (response.statusCode() == 200) {
+                String jsonResponse = response.body();
+                repuestoID = parseRepuestoIdFromResponse(jsonResponse);
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return repuestoID;
+    }
+
+    private int parseRepuestoIdFromResponse(String jsonResponse) {
+        int repuestoID = 0;
+        try {
+            JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
+            if (jsonObject.get("success").getAsBoolean()) {
+                JsonArray resultArray = jsonObject.getAsJsonObject("data").getAsJsonArray("result");
+                if (!resultArray.isJsonNull() && resultArray.size() > 0) {
+                    JsonObject rechazoJson = resultArray.get(0).getAsJsonObject();
+                    repuestoID = rechazoJson.get("id_Repuesto").getAsInt();
+                }
+            }
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        }
+        return repuestoID;
 
 
-
+    }
 
 }
