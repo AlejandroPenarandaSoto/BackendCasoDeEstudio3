@@ -47,6 +47,45 @@ public class ProformaDAO extends ApiConector {
         }
         return clientes;
     }
+    public List<Proforma> getProformas() {
+        List<Proforma> proformas = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM FgE_Proformas ";
+            String encodedUrl = this.getAPIURL(query);
+            HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
+            if (response.statusCode() == 200) {
+                String jsonResponse = response.body();
+                System.out.println("JSON response: " + jsonResponse);
+                proformas.addAll(parseProforma(jsonResponse));
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return proformas;
+    }
+    private List<Proforma> parseProforma(String jsonResponse) {
+        List<Proforma> ProformaList = new ArrayList<>();
+        try {
+            JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
+            if (jsonObject.get("success").getAsBoolean()) {
+                JsonArray resultArray = jsonObject.getAsJsonObject("data").getAsJsonArray("result");
+                for (JsonElement element : resultArray) {
+                    JsonObject proformaJson = element.getAsJsonObject();
+                    int id_Vendedor = proformaJson.get("id_Vendedor").isJsonNull() ? 0 : proformaJson.get("id_Vendedor").getAsInt();
+                    int id_proforma = proformaJson.get("id_proforma").isJsonNull() ? 0 : proformaJson.get("id_proforma").getAsInt();
+                    int id_Cliente = proformaJson.get("id_Cliente").isJsonNull() ? 0 : proformaJson.get("id_Cliente").getAsInt();
+                    String estado = proformaJson.get("estado").isJsonNull() ? "" : proformaJson.get("estado").getAsString();
+
+                    Proforma proformas = new Proforma(estado,id_Cliente, id_proforma,id_Vendedor );
+                    ProformaList.add(proformas);
+                }
+            }
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        }
+        return ProformaList;
+    }
+
 
     private List<String> parseClientesFromResponse(String jsonResponse) {
         List<String> clientes = new ArrayList<>();
