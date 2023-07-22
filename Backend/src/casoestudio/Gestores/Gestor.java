@@ -26,8 +26,8 @@ public class Gestor {
         this.modDAO = modDAO;
         this.mmDAO = mmDAO;
     }
-    public void registrarUsuario(Usuarios ufabrica, String nombre, String apellido1, String apellido2, String cel, int rol_id){
-        _Usuario tmpUser = ufabrica.crearUsuario(nombre,apellido1,apellido2,cel,rol_id);
+    public void registrarUsuario(Usuarios ufabrica, String nombre, String apellido1, String apellido2, String cel, int rol_id , String user, String pswd){
+        _Usuario tmpUser = ufabrica.crearUsuario(nombre,apellido1,apellido2,cel,rol_id, user,pswd);
         _UsuarioDAO dao = new _UsuarioDAO();
         dao.registrarUsuario(tmpUser);
 
@@ -77,4 +77,28 @@ public class Gestor {
         RechazoDAO dao = new RechazoDAO();
         dao.insertarRazonRechazo(tmpRechazo);
     }
+
+    public int getUsuarioIdByUser(String username){
+        int id = 0;
+        _UsuarioDAO dao = new _UsuarioDAO();
+         id = dao.getUsuarioIdByUsername(username);
+
+         return id;
+    }
+
+    public String getUsername(String _user){
+        String user = " ";
+        _UsuarioDAO dao = new _UsuarioDAO();
+        dao.getUsername(_user);
+        return user;
+    }
+
+    public String getPswd(String _pswd){
+        String pswd = " ";
+        _UsuarioDAO dao = new _UsuarioDAO();
+        dao.getPswd(_pswd);
+        return pswd;
+    }
+
+
 }

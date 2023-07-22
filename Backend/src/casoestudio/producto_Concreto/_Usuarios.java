@@ -7,7 +7,10 @@ public class _Usuarios implements _Usuario {
     private String apellido1;
     private String apellido2;
     private String telefono;
+    private String usuario;
+    private String pswd;
     private int rol_id;
+
 
 
 
@@ -52,19 +55,41 @@ public class _Usuarios implements _Usuario {
         this.rol_id = rol_id;
     }
 
-    public _Usuarios(String nombre, String apellido1, String apellido2, String telefono, int rol_id) {
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPswd() {
+        return pswd;
+    }
+
+    public void setPswd(String pswd) {
+        this.pswd = pswd;
+    }
+
+    public _Usuarios(String nombre, String apellido1, String apellido2, String telefono, int rol_id,String usuario, String _pswd) {
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.telefono = telefono;
         this.rol_id = rol_id;
+        this.usuario = usuario;
+        this.pswd = _pswd;
     }
 
-    public _Usuarios(String nombre, String apellido1, String apellido2, String telefono) {
+
+
+    public _Usuarios(String nombre, String apellido1, String apellido2, String telefono, String usuario, String pswd) {
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.telefono = telefono;
+        this.usuario = usuario;
+        this.pswd = pswd;
     }
 
     public _Usuarios() {
@@ -87,12 +112,12 @@ public class _Usuarios implements _Usuario {
 
         String rol=" ";
         if(getRol_id() == 1){
-            rol = "Vendedor";
-        } else if (getRol_id()==2) {
             rol = "Cliente";
+        } else if (getRol_id()==2) {
+            rol = "Vendedor";
         }
 
-        return "El rol del usuario es: " + rol;
+        return "El rol de este usuario es: " +  rol;
 
     }
 
@@ -103,6 +128,8 @@ public class _Usuarios implements _Usuario {
                 ", apellido1='" + apellido1 + '\'' +
                 ", apellido2='" + apellido2 + '\'' +
                 ", telefono='" + telefono + '\'' +
+                ", usuario='" + usuario + '\'' +
+                ", pswd='" + pswd + '\'' +
                 ", rol_id=" + rol_id +
                 '}';
     }

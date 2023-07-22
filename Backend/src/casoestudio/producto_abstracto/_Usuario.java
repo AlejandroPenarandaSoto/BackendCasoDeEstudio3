@@ -18,4 +18,7 @@ public interface _Usuario {
     public String getTelefono();
 
     public int getRol_id();
+
+    public String getUsuario();
+    public String getPswd();
 }

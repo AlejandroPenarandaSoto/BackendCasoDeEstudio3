@@ -1,6 +1,7 @@
 package casoestudio.producto_Concreto;
 
 import casoestudio.Fabrica_Abstracta.Usuarios;
+import casoestudio.Gestores.Gestor;
 import casoestudio.producto_Concreto.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,9 +17,11 @@ public class mainPrueba {
 
 
     private static Scanner scanner;
-    private static GestorPrueba appGestor = new GestorPrueba();
+    private static Gestor appGestor = new Gestor();
 
     public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
+        String user = appGestor.getUsername("manu1");
+        System.out.println(user);
 
     }
     public static void print(String pText) {

@@ -3,7 +3,8 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Backend_jar</output-path>
     <root id="archive" name="Backend.jar">
       <element id="module-output" name="Backend" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/mysql-connector-j-8.0.33 (1).jar" path-in-jar="/" />
+      <element id="library" level="project" name="mysql-connector-j-8.0.33 (1)" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../gson-2.10.1.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
