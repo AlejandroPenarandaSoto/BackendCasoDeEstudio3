@@ -8,13 +8,13 @@ public class Repuesto {
    // private int codID;
     private String Categoria;
   //  private String Modelo;
-    private int Precio;
+    private double Precio;
    // private int Annio;
   //  private int cantidad;
     private int marcaR;
     private int tipoR;
 
-    public Repuesto( int tipoR,String nombre, String descripcion,  String categoria,  int precio,  int marcaR) {
+    public Repuesto( int tipoR,String nombre, String descripcion,  String categoria,  double precio,  int marcaR) {
         Nombre = nombre;
         Descripcion = descripcion;
       //  this.codID = codID;
@@ -55,7 +55,7 @@ public class Repuesto {
 
 
 
-    public int getPrecio() {
+    public double getPrecio() {
         return Precio;
     }
 

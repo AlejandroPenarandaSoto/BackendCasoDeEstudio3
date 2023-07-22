@@ -22,9 +22,7 @@ public class RepuestoDAO extends ApiConector {
     public void registrarRepuesto(Repuesto rp){
         try{
 
-            String mConecc= this.getAPIURL("INSERT INTO FgE_Repuestos(id_TipoRepuesto,nombre,descripcion,categoria,precio,id_MarcaRespuesto) " +
-                    "VALUES ( " + rp.getTipoR() + " , '" + rp.getNombre() + "','" + rp.getDescripcion() + "', '" + rp.getCategoria()+ "', " + rp.getPrecio()+ ", " + rp.getMarcaR() + ")");
-
+            String mConecc= this.getAPIURL("INSERT INTO FgE_Repuestos(id_TipoRepuesto,nombre,descripcion,categoria,precio,id_MarcaRespuesto) " + "VALUES ( " + rp.getTipoR() + " , '" + rp.getNombre() + "','" + rp.getDescripcion() + "', '" + rp.getCategoria()+ "', " + rp.getPrecio()+ ", " + rp.getMarcaR() + ")");
             HttpResponse resp =this.EjecutarLlamado(mConecc);
             int statusCode = resp.statusCode();
             HttpHeaders headers = resp.headers();
@@ -41,6 +39,22 @@ public class RepuestoDAO extends ApiConector {
             e.printStackTrace();
         }
     }
+    public List<Repuesto> getRepuesto() {
+        List<Repuesto> RepuestosList = new ArrayList<>();
+        try {
+            String mConecc = this.getAPIURL("SELECT * FROM FgE_Repuestos");
+            HttpResponse resp = this.EjecutarLlamado(mConecc);
+            int statusCode = resp.statusCode();
+            HttpHeaders headers = resp.headers();
+            String jsonResponse = (String) resp.body();
+            System.out.println("JSON response: " + jsonResponse);
+            RepuestosList = parseRepuestoFromResponse(jsonResponse);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return RepuestosList;
+    }
+
     private List<Repuesto> parseRepuestoFromResponse(String jsonResponse) {
         List<Repuesto> RepuestoList = new ArrayList<>();
         try {
@@ -53,7 +67,7 @@ public class RepuestoDAO extends ApiConector {
                     String nombre = repuestoJson.get("nombre").getAsString();
                     String descripcion = repuestoJson.get("descripcion").getAsString();
                     String categoria = repuestoJson.get("categoria").getAsString();
-                    int precio = repuestoJson.get("precio").getAsInt();
+                    double precio = repuestoJson.get("precio").getAsDouble();
                     int marcaR = repuestoJson.get("id_MarcaRespuesto").getAsInt();
                     Repuesto repuesto = new Repuesto(tipoR, nombre, descripcion, categoria, precio, marcaR);
                     RepuestoList.add(repuesto);
@@ -66,49 +80,6 @@ public class RepuestoDAO extends ApiConector {
     }
 
 
-    public List<Repuesto> getRepuesto() {
-        List<Repuesto> RepuestosList = new ArrayList<>();
-        try {
 
-            String mConecc = this.getAPIURL("SELECT * FROM FgE_Repuestos");
-            HttpResponse resp = this.EjecutarLlamado(mConecc);
-            int statusCode = resp.statusCode();
-            HttpHeaders headers = resp.headers();
-
-            String jsonResponse = (String) resp.body();
-
-            System.out.println("Status code: " + statusCode);
-            System.out.println("Response headers: " + headers);
-            System.out.println("Response body: " + jsonResponse);
-
-
-
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        return RepuestosList;
-    }
-    private List<Nave> parseNaveFromResponse(String jsonResponse) {
-        List<Nave> NaveList = new ArrayList<>();
-        try {
-            JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
-            if (jsonObject.get("success").getAsBoolean()) {
-                JsonArray resultArray = jsonObject.getAsJsonObject("data").getAsJsonArray("result");
-                for (JsonElement element : resultArray) {
-                    JsonObject naveModeloJson = element.getAsJsonObject();
-                    String codigo = naveModeloJson.get("codigo_identificacion").getAsString();
-                    String color = naveModeloJson.get("color").getAsString();
-                    int idMarcaModelo = naveModeloJson.get("id_MarcaModelo").getAsInt();
-                    int idU = naveModeloJson.get("id_usuario").getAsInt();
-                    int idCat = naveModeloJson.get("id_Categoria").getAsInt();
-                    Nave nave = new Nave(codigo, color, idCat, idMarcaModelo, idU);
-                    NaveList.add(nave);
-                }
-            }
-        } catch (JsonParseException e) {
-            e.printStackTrace();
-        }
-        return NaveList;
-    }
 
 }
