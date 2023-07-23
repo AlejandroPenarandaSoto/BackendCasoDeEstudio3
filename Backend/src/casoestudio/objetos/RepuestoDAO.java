@@ -22,7 +22,8 @@ public class RepuestoDAO extends ApiConector {
     public void registrarRepuesto(Repuesto rp){
         try{
 
-            String mConecc= this.getAPIURL("INSERT INTO FgE_Repuestos(id_TipoRepuesto,nombre,descripcion,categoria,precio,id_MarcaRespuesto) " + "VALUES ( " + rp.getTipoR() + " , '" + rp.getNombre() + "','" + rp.getDescripcion() + "', '" + rp.getCategoria()+ "', " + rp.getPrecio()+ ", " + rp.getMarcaR() + ")");
+            String mConecc= this.getAPIURL("INSERT INTO FgE_Repuestos(id_TipoRepuesto,nombre,descripcion,categoria,precio,id_MarcaRespuesto,anio,cantidas) " +
+                    "VALUES ( " + rp.getTipoR() + " , '" + rp.getNombre() + "','" + rp.getDescripcion() + "', '" + rp.getCategoria()+ "', " + rp.getPrecio()+ ", " + rp.getMarcaR() +  ", " + rp.getAnnio()+ ", " + rp.getCantidad() +")");
             HttpResponse resp =this.EjecutarLlamado(mConecc);
             int statusCode = resp.statusCode();
             HttpHeaders headers = resp.headers();
@@ -69,7 +70,9 @@ public class RepuestoDAO extends ApiConector {
                     String categoria = repuestoJson.get("categoria").getAsString();
                     double precio = repuestoJson.get("precio").getAsDouble();
                     int marcaR = repuestoJson.get("id_MarcaRespuesto").getAsInt();
-                    Repuesto repuesto = new Repuesto(tipoR, nombre, descripcion, categoria, precio, marcaR);
+                    int annio = repuestoJson.get("anio").getAsInt();
+                    int cantidas = repuestoJson.get("cantidas").getAsInt();
+                    Repuesto repuesto = new Repuesto(tipoR, nombre, descripcion, categoria, precio, marcaR,annio,cantidas);
                     RepuestoList.add(repuesto);
                 }
             }

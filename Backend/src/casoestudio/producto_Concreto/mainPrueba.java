@@ -24,6 +24,8 @@ public class mainPrueba {
         NaveDAO  naveDAO = new NaveDAO();
         _UsuarioDAO usuarioDAO = new _UsuarioDAO();
 
+       // appGestor.registrarRepuesto(1,"prueba4","prueba4","prueba4",3000,1,2023,2);
+        appGestor.tipoRepuestoID("Mecanico");
 
 
     }

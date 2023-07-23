@@ -6,6 +6,8 @@ import casoestudio.producto_Concreto._UsuarioDAO;
 import casoestudio.producto_Concreto._Usuarios;
 import casoestudio.producto_abstracto._Usuario;
 
+import java.util.List;
+
 public class Gestor {
     private CategoriaDAO catDAO;
     private MarcaDAO marDAO;
@@ -118,10 +120,27 @@ public class Gestor {
 
     //funciones Luis
 
-    public void listarMarcaRepuesto(){
+    public List<String> listarMarcaRepuesto(){
         MarcaRepuestoDAO mr = new MarcaRepuestoDAO();
         mr.getMarcaRepuesto();
-        mr.getMarcaRepuesto();
+         return mr.getMarcaRepuesto();
+    }
+
+    public List<String> listarTipoRepuesto(){
+        TipoRepuestoDAO tr = new TipoRepuestoDAO();
+        tr.getTipoRepuesto();
+        return tr.getTipoRepuesto();
+    }
+
+    public int marcaRepuestoID(String marca){
+        MarcaRepuestoDAO mr = new MarcaRepuestoDAO();
+        mr.getMarcaRepuestoId(marca);
+        return mr.getMarcaRepuestoId(marca);
+    }
+    public int tipoRepuestoID(String tipor){
+        TipoRepuestoDAO tr = new TipoRepuestoDAO();
+        tr.getTipoRepuestoId(tipor);
+        return tr.getTipoRepuestoId(tipor);
     }
     public  void registrarMarcaR(String nombre) {
         MarcaRepuesto tmpMarcaRepuesto = new MarcaRepuesto(nombre);
@@ -138,8 +157,8 @@ public class Gestor {
     }
 
 
-    public  void registrarRepuesto(int tipoR,String nombre, String descripcion,  String categoria, int precio,int marcaR) {
-        Repuesto tmpRepuesto = new Repuesto(tipoR ,nombre,descripcion,categoria,precio,marcaR);
+    public  void registrarRepuesto(int tipoR,String nombre, String descripcion,  String categoria, int precio,int marcaR, int annio,int cantidad) {
+        Repuesto tmpRepuesto = new Repuesto(tipoR ,nombre,descripcion,categoria,precio,marcaR,annio,cantidad);
         RepuestoDAO rDAO = new RepuestoDAO();
         rDAO.registrarRepuesto(tmpRepuesto);
     }
