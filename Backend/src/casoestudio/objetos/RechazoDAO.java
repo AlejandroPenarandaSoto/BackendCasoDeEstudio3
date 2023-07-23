@@ -66,4 +66,36 @@ public class RechazoDAO extends ApiConector {
         }
         return RazonesRechazoList;
     }
+    public int getRechazoId(String des) {
+        int rechazoId = 0;
+        try {
+            String query = "SELECT id_razon FROM FgE_RazonesRechazo WHERE descripcion = '" + des + "'";
+            String encodedUrl = this.getAPIURL(query);
+            HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
+            if (response.statusCode() == 200) {
+                String jsonResponse = response.body();
+                rechazoId = parseRechazoIdFromResponse(jsonResponse);
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return rechazoId;
+    }
+
+    private int parseRechazoIdFromResponse(String jsonResponse) {
+        int rechazoId = 0;
+        try {
+            JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
+            if (jsonObject.get("success").getAsBoolean()) {
+                JsonArray resultArray = jsonObject.getAsJsonObject("data").getAsJsonArray("result");
+                if (!resultArray.isJsonNull() && resultArray.size() > 0) {
+                    JsonObject rechazoJson = resultArray.get(0).getAsJsonObject();
+                    rechazoId = rechazoJson.get("id_razon").getAsInt();
+                }
+            }
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        }
+        return rechazoId;
+    }
 }
