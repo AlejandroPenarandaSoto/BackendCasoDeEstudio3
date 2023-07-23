@@ -211,6 +211,27 @@ public class _UsuarioDAO extends ApiConector {
         }
         return proformas;
     }
+    public List<Proforma> getProformasCliente(int idUsuario) {
+        List<Proforma> proformas = new ArrayList<>();
+        try {
+
+            String query = "SELECT id_proforma, id_Cliente,id_Vendedor,estado FROM FgE_Proformas WHERE id_Cliente = " + idUsuario;
+
+
+            String encodedUrl = this.getAPIURL(query);
+
+
+            HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
+
+            if (response.statusCode() == 200) {
+                String jsonResponse = response.body();
+                proformas.addAll(parseProformasFromResponse(jsonResponse));
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return proformas;
+    }
 
     private List<Proforma> parseProformasFromResponse(String jsonResponse) {
         List<Proforma> parsedProformas = new ArrayList<>();
