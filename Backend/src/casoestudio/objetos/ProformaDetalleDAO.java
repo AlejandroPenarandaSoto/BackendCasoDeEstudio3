@@ -20,9 +20,7 @@ public class ProformaDetalleDAO extends ApiConector {
 
             String jsonResponse = (String) resp.body();
 
-            System.out.println("Status code: " + statusCode);
-            System.out.println("Response headers: " + headers);
-            System.out.println("Response body: " + jsonResponse);
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
