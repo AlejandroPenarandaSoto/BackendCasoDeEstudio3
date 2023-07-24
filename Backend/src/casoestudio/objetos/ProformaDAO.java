@@ -247,4 +247,43 @@ public class ProformaDAO extends ApiConector {
         }
         return vendedorId;
     }
+
+    public List<Proforma> getProformasByIdCliente(int idCliente) {
+        List<Proforma> proformas = new ArrayList<>();
+        try {
+            String query = "SELECT id_proforma, id_Cliente, id_Vendedor FROM FgE_Proformas WHERE id_Cliente = \"" + idCliente + "\"";
+            String encodedUrl = this.getAPIURL(query);
+            HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
+            if (response.statusCode() == 200) {
+                String jsonResponse = response.body();
+                System.out.println("JSON response: " + jsonResponse);
+                proformas.addAll(parseProformaSinEstado(jsonResponse));
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return proformas;
+    }
+    private List<Proforma> parseProformaSinEstado(String jsonResponse) {
+        List<Proforma> ProformaSinEstadoList = new ArrayList<>();
+        try {
+            JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
+            if (jsonObject.get("success").getAsBoolean()) {
+                JsonArray resultArray = jsonObject.getAsJsonObject("data").getAsJsonArray("result");
+                for (JsonElement element : resultArray) {
+                    JsonObject proformaJson = element.getAsJsonObject();
+                    int id_Proforma = proformaJson.get("id_proforma").getAsInt();
+                    int id_Cliente = proformaJson.get("id_Cliente").getAsInt();
+                    int id_Vendedor = proformaJson.get("id_Vendedor").getAsInt();
+
+                    Proforma proformas = new Proforma(id_Cliente, id_Proforma,id_Vendedor);
+                    ProformaSinEstadoList.add(proformas);
+                }
+            }
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        }
+        return ProformaSinEstadoList;
+    }
+
 }

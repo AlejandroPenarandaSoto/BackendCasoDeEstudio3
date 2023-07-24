@@ -20,6 +20,12 @@ public class Proforma {
         this.id_Vendedor = id_Vendedor;
     }
 
+    public Proforma(int id_Cliente, int id_Proforma, int id_Vendedor) {
+        this.id_Cliente = id_Cliente;
+        this.id_Proforma = id_Proforma;
+        this.id_Vendedor = id_Vendedor;
+    }
+
     public int getId_Proforma() {
         return id_Proforma;
     }

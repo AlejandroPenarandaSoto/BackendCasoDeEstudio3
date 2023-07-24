@@ -66,7 +66,20 @@ public class ProformaDetalleDAO extends ApiConector {
         return DetallesProformaList;
     }
 
-
+    public List<DetalleProforma> getDetallesfById(int idProforma) {
+        List<DetalleProforma> DetallesList = new ArrayList<>();
+        try {
+            String mConecc = this.getAPIURL("SELECT * FROM FgE_DetalleProforma WHERE id_proforma = \"" + idProforma + "\"");
+            HttpResponse resp = this.EjecutarLlamado(mConecc);
+            int statusCode = resp.statusCode();
+            HttpHeaders headers = resp.headers();
+            String jsonResponse = (String) resp.body();
+            DetallesList = parseDetallesProforma(jsonResponse);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return DetallesList;
+    }
 
 }
 

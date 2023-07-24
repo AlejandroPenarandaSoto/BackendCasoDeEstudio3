@@ -17,8 +17,9 @@ public class Gestor {
     private NaveDAO naveDAO;
     private ProformaDAO proformaDAO;
     private RechazoDAO rechazoDAO;
-    private MarcaRepuestoDAO marcaRepuestoDAO;
     private ProformaDetalleDAO proformaDetalleDAO;
+    private MarcaRepuestoDAO marcaRepuestoDAO;
+    
     public Gestor() {
     }
 
@@ -200,8 +201,14 @@ public class Gestor {
         return categoriaDAO.getDataCategoria(ctg);
     }
 
+    public List<Proforma> getProformasByIdCliente(int idCliente) {
+        ProformaDAO proformaDAO = new ProformaDAO();
+        return proformaDAO.getProformasByIdCliente(idCliente);
+    }
 
-
-
+    public List<DetalleProforma> getDetalleProformaByProformaId(int idProforma) {
+        ProformaDetalleDAO proformaDetalleDAO = new ProformaDetalleDAO();
+        return proformaDetalleDAO.getDetallesfById(idProforma);
+    }
 
 }
