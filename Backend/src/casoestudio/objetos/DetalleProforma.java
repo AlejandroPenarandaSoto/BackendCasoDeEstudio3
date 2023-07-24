@@ -8,17 +8,17 @@ public class DetalleProforma {
     private int id_repuesto;
     private String estado;
     private int id_rechazo;
-    private int id_detalle;
+
 
     public DetalleProforma() {
     }
 
-    public DetalleProforma(int id_proforma, int id_repuesto, String estado, int id_rechazo, int id_detalle) {
+    public DetalleProforma(int id_proforma, int id_repuesto, String estado, int id_rechazo) {
         this.id_proforma = id_proforma;
         this.id_repuesto = id_repuesto;
         this.estado = estado;
         this.id_rechazo = id_rechazo;
-        this.id_detalle = id_detalle;
+
     }
 
     public int getId_proforma() {
@@ -53,13 +53,7 @@ public class DetalleProforma {
         this.id_rechazo = id_rechazo;
     }
 
-    public int getId_detalle() {
-        return id_detalle;
-    }
 
-    public void setId_detalle(int id_detalle) {
-        this.id_detalle = id_detalle;
-    }
 
     @Override
     public String toString() {
@@ -68,7 +62,7 @@ public class DetalleProforma {
                 ", id_repuesto=" + id_repuesto +
                 ", estado='" + estado + '\'' +
                 ", id_rechazo=" + id_rechazo +
-                ", id_detalle=" + id_detalle +
+
                 '}';
     }
 }
