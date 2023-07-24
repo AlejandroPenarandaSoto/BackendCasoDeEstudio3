@@ -18,6 +18,7 @@ public class Gestor {
     private ProformaDAO proformaDAO;
     private RechazoDAO rechazoDAO;
     private MarcaRepuestoDAO marcaRepuestoDAO;
+    private ProformaDetalleDAO proformaDetalleDAO;
     public Gestor() {
     }
 
@@ -78,8 +79,8 @@ public class Gestor {
         RechazoDAO dao = new RechazoDAO();
         dao.insertarRazonRechazo(tmpRechazo);
     }
-    public  void registrarDetalleProf(int id_detalle, int id_proforma, int id_repuesto, String estado, int id_rechazo){
-        DetalleProforma tmpDetalle = new DetalleProforma(id_proforma, id_repuesto, estado, id_rechazo, id_detalle);
+    public  void registrarDetalleProf(int id_proforma, int id_repuesto, String estado, int id_rechazo){
+        DetalleProforma tmpDetalle = new DetalleProforma(id_proforma, id_repuesto, estado, id_rechazo);
         ProformaDetalleDAO dao = new ProformaDetalleDAO();
         dao.insertarDetalleProforma(tmpDetalle);
     }
