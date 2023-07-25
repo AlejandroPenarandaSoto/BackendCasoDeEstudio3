@@ -94,11 +94,6 @@ public class _UsuarioDAO extends ApiConector {
                 int statusCode = response.statusCode();
                 usuarioId  = parseUIdFromResponse(jsonResponse);
                 HttpHeaders headers = response.headers();
-
-                System.out.println("Status code: " + statusCode);
-                System.out.println("Response headers: " + headers);
-                System.out.println("Response body: " + jsonResponse);
-
             }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -395,8 +390,6 @@ public class _UsuarioDAO extends ApiConector {
             if (statusCode == 200) {
                 String jsonResponse = resp.body();
                 usuario = parseUsuario(jsonResponse);
-            } else {
-                System.out.println("Error al obtener datos del usuario. Código de estado: " + statusCode);
             }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -447,11 +440,6 @@ public class _UsuarioDAO extends ApiConector {
                 int statusCode = response.statusCode();
                 usuarioId  = parseUId(jsonResponse);
                 HttpHeaders headers = response.headers();
-
-                System.out.println("Status code: " + statusCode);
-                System.out.println("Response headers: " + headers);
-                System.out.println("Response body: " + jsonResponse);
-
             }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();

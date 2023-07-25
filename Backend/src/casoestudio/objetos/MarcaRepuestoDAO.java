@@ -89,11 +89,6 @@ public class MarcaRepuestoDAO extends ApiConector {
                 int statusCode = response.statusCode();
                 marcarId  = parseMrId(jsonResponse);
                 HttpHeaders headers = response.headers();
-
-                System.out.println("Status code: " + statusCode);
-                System.out.println("Response headers: " + headers);
-                System.out.println("Response body: " + jsonResponse);
-
             }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();

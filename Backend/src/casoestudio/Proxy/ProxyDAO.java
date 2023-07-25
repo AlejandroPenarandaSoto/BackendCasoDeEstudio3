@@ -11,7 +11,6 @@ import java.net.http.HttpResponse;
 public class ProxyDAO extends ApiConector {
 
     public int getClienteId(String cotrasenna) {
-        System.out.println("Contrasenna: " + cotrasenna);
         int clienteId = 0;
         try {
             String query = "SELECT id_usuario FROM FgE_Usuarios WHERE contrasenia = \"" + cotrasenna + "\"";

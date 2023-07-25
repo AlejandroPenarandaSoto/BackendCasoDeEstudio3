@@ -19,7 +19,6 @@ public class CategoriaDAO extends ApiConector {
             HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
             if (response.statusCode() == 200) {
                 String jsonResponse = response.body();
-                System.out.println("JSON response: " + jsonResponse);
                 categorias.addAll(parseCategoriasFromResponse(jsonResponse));
             }
         } catch (IOException | InterruptedException e) {
@@ -118,8 +117,6 @@ public class CategoriaDAO extends ApiConector {
             if (statusCode == 200) {
                 String jsonResponse = resp.body();
                 categoria = parseCategoria(jsonResponse);
-            } else {
-                System.out.println("Error al obtener datos del usuario. Código de estado: " + statusCode);
             }
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();

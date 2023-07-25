@@ -8,8 +8,6 @@ import java.net.http.HttpHeaders;
 import java.net.http.HttpResponse;
 import java.util.*;
 
-import static java.lang.System.out;
-
 public class TipoRepuestoDAO extends ApiConector {
 
     public void registrarTipoRepuesto(TipoRepuesto tr){
@@ -21,11 +19,6 @@ public class TipoRepuestoDAO extends ApiConector {
             HttpHeaders headers = resp.headers();
 
             String jsonResponse = (String) resp.body();
-
-            //Elminar
-            out.println("Status code: " + statusCode);
-            out.println("Response headers: " + headers);
-            out.println("Response body: " + jsonResponse);
         }catch(IOException e){
             e.printStackTrace();
         }catch(InterruptedException e){
@@ -88,10 +81,6 @@ public class TipoRepuestoDAO extends ApiConector {
                 int statusCode = response.statusCode();
                 trId  = parsetrId(jsonResponse);
                 HttpHeaders headers = response.headers();
-
-                System.out.println("Status code: " + statusCode);
-                System.out.println("Response headers: " + headers);
-                System.out.println("Response body: " + jsonResponse);
 
             }
         } catch (IOException | InterruptedException e) {

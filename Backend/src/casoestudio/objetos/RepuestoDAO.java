@@ -1,8 +1,5 @@
 package casoestudio.objetos;
 
-
-
-
 import casoestudio.api.ApiConector;
 import com.google.gson.*;
 
@@ -11,9 +8,6 @@ import java.net.http.HttpHeaders;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.System.out;
-
 
 public class RepuestoDAO extends ApiConector {
 
@@ -30,10 +24,7 @@ public class RepuestoDAO extends ApiConector {
 
             String jsonResponse = (String) resp.body();
 
-            //Elminar
-            out.println("Status code: " + statusCode);
-            out.println("Response headers: " + headers);
-            out.println("Response body: " + jsonResponse);
+
         }catch(IOException e){
             e.printStackTrace();
         }catch(InterruptedException e){
@@ -48,7 +39,6 @@ public class RepuestoDAO extends ApiConector {
             int statusCode = resp.statusCode();
             HttpHeaders headers = resp.headers();
             String jsonResponse = (String) resp.body();
-            System.out.println("JSON response: " + jsonResponse);
             RepuestosList = parseRepuestoFromResponse(jsonResponse);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();

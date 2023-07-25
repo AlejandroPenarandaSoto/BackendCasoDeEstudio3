@@ -124,13 +124,7 @@ public class NaveDAO extends ApiConector {
             HttpResponse resp = this.EjecutarLlamado(mConecc);
             int statusCode = resp.statusCode();
             HttpHeaders headers = resp.headers();
-
             String jsonResponse = (String) resp.body();
-
-            System.out.println("Status code: " + statusCode);
-            System.out.println("Response headers: " + headers);
-            System.out.println("Response body: " + jsonResponse);
-
             naveList = parseNaveUsuario(jsonResponse); // Asignar el resultado del método parseNave al List naveList
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();

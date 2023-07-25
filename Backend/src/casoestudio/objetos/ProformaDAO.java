@@ -18,12 +18,7 @@ public class ProformaDAO extends ApiConector {
             HttpResponse resp = this.EjecutarLlamado(mConecc);
             int statusCode = resp.statusCode();
             HttpHeaders headers = resp.headers();
-
             String jsonResponse = (String) resp.body();
-
-            System.out.println("Status code: " + statusCode);
-            System.out.println("Response headers: " + headers);
-            System.out.println("Response body: " + jsonResponse);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -39,7 +34,6 @@ public class ProformaDAO extends ApiConector {
             HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
             if (response.statusCode() == 200) {
                 String jsonResponse = response.body();
-                System.out.println("JSON response: " + jsonResponse);
                 clientes.addAll(parseClientesFromResponse(jsonResponse));
             }
         } catch (IOException | InterruptedException e) {
@@ -55,7 +49,6 @@ public class ProformaDAO extends ApiConector {
             HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
             if (response.statusCode() == 200) {
                 String jsonResponse = response.body();
-                System.out.println("JSON response: " + jsonResponse);
                 proformas.addAll(parseProforma(jsonResponse));
             }
         } catch (IOException | InterruptedException e) {
@@ -126,7 +119,6 @@ public class ProformaDAO extends ApiConector {
             HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
             if (response.statusCode() == 200) {
                 String jsonResponse = response.body();
-                System.out.println("JSON response: " + jsonResponse);
                 vendedores.addAll(parseVendedoresFromResponse(jsonResponse));
             }
         } catch (IOException | InterruptedException e) {
@@ -167,7 +159,6 @@ public class ProformaDAO extends ApiConector {
     }
 
     public int getClienteId(String clienteValue) {
-        System.out.println("Cliente Value: " + clienteValue);
         int clienteId = 0;
         try {
             String query = "SELECT id_usuario FROM FgE_Usuarios WHERE nombre = \"" + clienteValue + "\"";
@@ -208,7 +199,6 @@ public class ProformaDAO extends ApiConector {
     }
 
     public int getVendedorId(String vendedorValue) {
-        System.out.println("Vendedor Value: " + vendedorValue);
         int vendedorId = 0;
         try {
             String query = "SELECT id_usuario FROM FgE_Usuarios WHERE nombre = \"" + vendedorValue + "\"";
@@ -256,7 +246,6 @@ public class ProformaDAO extends ApiConector {
             HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
             if (response.statusCode() == 200) {
                 String jsonResponse = response.body();
-                System.out.println("JSON response: " + jsonResponse);
                 proformas.addAll(parseProformaSinEstado(jsonResponse));
             }
         } catch (IOException | InterruptedException e) {
