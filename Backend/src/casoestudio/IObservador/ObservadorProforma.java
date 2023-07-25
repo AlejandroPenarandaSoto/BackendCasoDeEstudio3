@@ -1,5 +1,8 @@
 package casoestudio.IObservador;
 
+import casoestudio.objetos.DetalleProforma;
+import casoestudio.objetos.Proforma;
+
 public interface ObservadorProforma {
-    String actualizarProforma(String mensaje);
+    void notificarNuevosDetalles (Proforma prof, DetalleProforma detalleProf);
 }

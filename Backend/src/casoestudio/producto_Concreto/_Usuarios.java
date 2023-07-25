@@ -2,6 +2,8 @@ package casoestudio.producto_Concreto;
 
 import casoestudio.Composite.Componente;
 import casoestudio.IObservador.ObservadorProforma;
+import casoestudio.objetos.DetalleProforma;
+import casoestudio.objetos.Proforma;
 import casoestudio.producto_abstracto._Usuario;
 
 import java.util.ArrayList;
@@ -151,15 +153,8 @@ public class _Usuarios implements _Usuario, Componente, ObservadorProforma {
         return "Usuario: " + getNombre() + " " + getApellido1() + " " + getApellido2();
     }
 
-    private List<ObservadorProforma> observadores = new ArrayList<>();
-    public void suscribirse(ObservadorProforma observador) {
-        observadores.add(observador);
-    }
-    public void desuscribirse(ObservadorProforma observador) {
-        observadores.remove(observador);
-    }
     @Override
-    public String actualizarProforma(String mensaje) {
-        return "Notificación recibida por el vendedor " + getNombre() + ": " + mensaje;
+    public void notificarNuevosDetalles(Proforma prof, DetalleProforma detalleProf) {
+        System.out.println("¡Hola, vendedor " + this.nombre + "! Se ha publicado un nuevo detalle de la proforma: " + detalleProf.getId_proforma());
     }
 }
