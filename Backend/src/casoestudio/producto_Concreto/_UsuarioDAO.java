@@ -23,6 +23,7 @@ public class _UsuarioDAO extends ApiConector {
             HttpHeaders headers = resp.headers();
 
             String jsonResponse = (String) resp.body();
+
         }catch(IOException e){
             e.printStackTrace();
         }catch(InterruptedException e){
@@ -183,8 +184,58 @@ public class _UsuarioDAO extends ApiConector {
             if (response.statusCode() == 200) {
                 String jsonResponse = response.body();
                 usuarios.addAll(parseUsuariosFromResponse(jsonResponse));
+
             }
         } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return usuarios;
+    }
+    public List<_Usuarios> getVendedoresbyID() {
+        List<_Usuarios> usuarios= new ArrayList<>();
+        try {
+            String query = "SELECT nombre FROM FgE_Usuarios WHERE id_rol = 2";
+            String encodedUrl = this.getAPIURL(query);
+            HttpResponse<String> response = this.EjecutarLlamado(encodedUrl);
+            if (response.statusCode() == 200) {
+                String jsonResponse = response.body();
+                usuarios.addAll(parseVendedoresFromResponse(jsonResponse));
+
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return usuarios;
+    }
+    private List<_Usuarios> parseVendedoresFromResponse(String jsonResponse) {
+        List<_Usuarios> usuarios = new ArrayList<>();
+        try {
+            JsonElement jsonElement = JsonParser.parseString(jsonResponse);
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            boolean success = jsonObject.get("success").getAsBoolean();
+            if (success) {
+                JsonObject dataObject = jsonObject.getAsJsonObject("data");
+                if (dataObject.has("result") && dataObject.get("result").isJsonArray()) {
+                    JsonArray resultArray = dataObject.getAsJsonArray("result");
+                    for (JsonElement element : resultArray) {
+                        JsonObject usuarioObject = element.getAsJsonObject();
+                        String nombre = usuarioObject.get("nombre").getAsString();
+                        String apellido1 = usuarioObject.get("apellido1").getAsString();
+                        String apellido2 = usuarioObject.get("apellido2").getAsString();
+                        String telefono = usuarioObject.get("telefono").getAsString();
+                        int rol_id = usuarioObject.get("id_rol").getAsInt();
+                        String usuario = usuarioObject.get("usuario").getAsString();
+                        String contrasenia = usuarioObject.get("contrasenia").getAsString();
+
+
+                        _Usuarios usuarios1 = new _Usuarios(nombre, apellido1, apellido2, telefono, rol_id, usuario, contrasenia);
+
+
+                        usuarios.add(usuarios1);
+                    }
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return usuarios;

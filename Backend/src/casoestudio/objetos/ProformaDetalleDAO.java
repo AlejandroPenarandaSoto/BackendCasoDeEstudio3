@@ -19,7 +19,11 @@ public class ProformaDetalleDAO extends ApiConector {
             HttpHeaders headers = resp.headers();
 
             String jsonResponse = (String) resp.body();
+            DetalleProforma detalleProformaInsertado = new DetalleProforma(d.getId_proforma(), d.getId_repuesto(), d.getEstado(), d.getId_rechazo());
 
+
+            Proforma proforma = new Proforma();
+            proforma.notificarNuevosDetalles(detalleProformaInsertado);
 
         } catch (IOException e) {
             e.printStackTrace();

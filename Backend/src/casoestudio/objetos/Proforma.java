@@ -1,5 +1,11 @@
 package casoestudio.objetos;
 
+import casoestudio.IObservador.ObservadorProforma;
+import casoestudio.producto_Concreto._Usuarios;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Proforma {
 
     private String estado;
@@ -69,4 +75,22 @@ public class Proforma {
                 ", id_Vendedor=" + id_Vendedor +
                 '}';
     }
+    private List<ObservadorProforma> observadores = new ArrayList<>();
+    public void registrarObservador(ObservadorProforma observador) {
+
+        observadores.add(observador);
+    }
+
+    // Método para desregistrar observadores (vendedores)
+    public void desregistrarObservador(ObservadorProforma observador) {
+        observadores.remove(observador);
+    }
+
+    // Método para notificar a los observadores (vendedores) cuando se publiquen nuevos detalles de proformas
+    public void notificarNuevosDetalles(DetalleProforma detalleProf) {
+        for (ObservadorProforma observador : observadores) {
+            observador.notificarNuevosDetalles(this, detalleProf);
+        }
+    }
 }
+
